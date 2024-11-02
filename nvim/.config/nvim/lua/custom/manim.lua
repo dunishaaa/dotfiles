@@ -1,46 +1,46 @@
 local function manimr()
-    local file = vim.cmd.f()
+	local file = vim.cmd.f()
 
-    local command = "manimr"
+	local command = "manimr"
 
-    local a = vim.fn.expand("%")
-    command = command .. " " .. a
+	local a = vim.fn.expand("%")
+	command = command .. " " .. a
 
-    print("\n")
-    print(command)
-    os.execute(command)
+	print("\n")
+	print(command)
+	os.execute(command)
 end
 
 local function manim(flags)
-    local file = vim.fn.expand("%:p")
-    local path = vim.fn.expand("%:h")
-    local command = '"manimr'
-    local section = false
-    local quality = 0
-    for i = 1, #flags do
-        command = command .. " " .. flags[i]
-    end
+	local file = vim.fn.expand("%:p")
+	local path = vim.fn.expand("%:h")
+	local command = '"manimr'
+	local section = false
+	local quality = 0
+	for i = 1, #flags do
+		command = command .. " " .. flags[i]
+	end
 
-    command = command .. " " .. file .. '"'
+	command = command .. " " .. file .. '"'
 
-    -- local scene = vim.fn.input("Select your scene > ")
-    --command = command .. " " .. scene .. '"'
-    path = '"' .. path .. '"'
+	-- local scene = vim.fn.input("Select your scene > ")
+	--command = command .. " " .. scene .. '"'
+	path = '"' .. path .. '"'
 
-    local conf = "size=40, dir=" .. path .. ", " .. "cmd=" .. command
-    --    local conf = "cmd=" .. command
-    print(conf)
-    vim.cmd.TermExec(conf)
+	local conf = "go_back=0 size=40 dir=" .. path .. " " .. "cmd=" .. command
+	--    local conf = "cmd=" .. command
+	print(conf)
+	vim.cmd.TermExec(conf)
 end
 
 vim.keymap.set("n", "<leader>mrl", function()
-    manim({ "-l" })
+	manim({ "-l" })
 end)
 
 vim.keymap.set("n", "<leader>mrh", function()
-    manim({ "-h" })
+	manim({ "-h" })
 end)
 
 vim.keymap.set("n", "<leader>mrs", function()
-    manim({ "-s", "-l" })
+	manim({ "-s", "-l" })
 end)
