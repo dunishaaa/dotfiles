@@ -30,3 +30,5 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>")
 
 vim.keymap.set("n", "[b", ":bprev<CR>")
 vim.keymap.set("n", "]b", ":bnext<CR>")
+
+vim.keymap.set("n", "<leader>[a", ":%y+<CR>")

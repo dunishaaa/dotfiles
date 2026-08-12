@@ -1,4 +1,5 @@
 set -g fish_greeting
+set -Ux fish_user_paths ~/.npm-global/bin $fish_user_paths
 
 if status is-interactive
     starship init fish | source

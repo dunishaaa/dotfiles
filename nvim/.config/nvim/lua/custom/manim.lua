@@ -1,28 +1,29 @@
 local function manim(flags)
-	local file = vim.fn.expand("%:p")
-	local path = vim.fn.expand("%:h")
-	local command = '"manimr'
-	for i = 1, #flags do
-		command = command .. " " .. flags[i]
-	end
+    local file = vim.fn.expand("%:p")
+    local path = vim.fn.expand("%:h")
+    local cur_line, c = table.unpack(vim.api.nvim_win_get_cursor(0))
+    local command = '"manimr'
+    for i = 1, #flags do
+        command = command .. " " .. flags[i]
+    end
+    command = command .. " " .. cur_line
 
-	command = command .. " " .. file .. '"'
+    command = command .. " " .. file .. '"'
 
-	path = '"' .. path .. '"'
+    path = '"' .. path .. '"'
 
-	local conf = "go_back=0 size=40 dir=" .. path .. " " .. "cmd=" .. command
-	print(conf)
-	vim.cmd.TermExec(conf)
+    local conf = "go_back=0 size=40 dir=" .. path .. " " .. "cmd=" .. command
+    vim.cmd.TermExec(conf)
 end
 
 vim.keymap.set("n", "<leader>mrl", function()
-	manim({ "-l" })
+    manim({ "-l" })
 end)
 
 vim.keymap.set("n", "<leader>mrh", function()
-	manim({ "-h" })
+    manim({ "-h" })
 end)
 
 vim.keymap.set("n", "<leader>mrs", function()
-	manim({ "-s", "-l" })
+    manim({ "-s", "-l" })
 end)

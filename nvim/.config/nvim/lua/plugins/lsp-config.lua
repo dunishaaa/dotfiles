@@ -1,53 +1,56 @@
 return {
-	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"rust_analyzer",
-					"clangd",
-					"ruff",
-					"basedpyright",
-					"jdtls",
-				},
-			})
-		end,
-	},
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    {
+        "williamboman/mason.nvim",
+        config = function()
+            require("mason").setup()
+        end,
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "lua_ls",
+                    "rust_analyzer",
+                    "clangd",
+                    "ruff",
+                    "basedpyright",
+                    "jdtls",
+                    "biome",
+                },
+            })
+        end,
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			local lspconfig = require("lspconfig")
+            vim.lsp.config("biome", {
+                capabilities = capabilities,
+            })
 
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.rust_analyzer.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.basedpyright.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.clangd.setup({
-				capabilities = capabilities,
-			})
+            vim.lsp.config("lua_ls", {
+                capabilities = capabilities,
+            })
+            vim.lsp.config("rust_analyzer", {
+                capabilities = capabilities,
+            })
+            vim.lsp.config("basedpyright", {
+                capabilities = capabilities,
+            })
+            vim.lsp.config("clangd", {
+                capabilities = capabilities,
+            })
 
-			lspconfig.jdtls.setup({
-				capabilities = capabilities,
-			})
+            vim.lsp.config("jdtls", {
+                capabilities = capabilities,
+            })
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-			vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-		end,
-	},
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+            vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
+            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+        end,
+    },
 }
