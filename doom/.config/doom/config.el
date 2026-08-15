@@ -1,4 +1,4 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
@@ -42,6 +42,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+(setq confirm-kill-emacs nil)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
@@ -73,4 +74,22 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(map! :n "C-n" 'neotree-toggle)
+(map! :n "C-n" '+treemacs/toggle)
+
+;; Tree-sitter grammar source for qml-ts-mode
+;; Tree-sitter grammar
+(after! treesit
+  (add-to-list 'treesit-language-source-alist
+               '(qmljs "https://github.com/yuja/tree-sitter-qmljs")))
+
+;; Make the existing qml-mode association use qml-ts-mode
+(after! qml-mode
+  (setcdr (assoc "\\.qml$" auto-mode-alist) 'qml-ts-mode))
+
+;; Eglot
+(after! eglot
+  (add-to-list 'eglot-server-programs
+               '(qml-ts-mode . ("qmlls6"))))
+
+;; Start Eglot automatically
+(add-hook 'qml-ts-mode-hook #'eglot-ensure)

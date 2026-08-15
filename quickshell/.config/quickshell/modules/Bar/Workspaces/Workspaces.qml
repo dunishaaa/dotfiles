@@ -1,32 +1,33 @@
 import Quickshell // for PanelWindow
+import Quickshell.Hyprland
 import QtQuick // for Text
 import QtQuick.Layouts // for Text
-import Quickshell.Io
 
-import Quickshell.Wayland
-import Quickshell.Hyprland
 
 import "../../../Palettes"
 RowLayout {
+    id: root
+    required property HyprlandMonitor monitor
     spacing: 5
     anchors {
         leftMargin: 20
-        left: bar.left
-        verticalCenter: bar.verticalCenter
+        left: parent.left
+        verticalCenter: parent.verticalCenter
     }
     Repeater {
-        model: Hyprland.workspaces.values.length
-        //model: 10
+        model: Hyprland.workspaces.values.filter(ws => ws.monitor === root.monitor)
         Rectangle {
             id: wsp
-
+            required property int index
+            required property HyprlandWorkspace modelData
             property bool hovered: false
-            width: 14
 
-            scale : hovered || isActive ? 1.3 : 1
-            color: isActive || hovered ? Dracula.cyan : "#cc8be8fd"
-            height: 15
+            width: 10
+            height: 10
             radius: 9
+
+            scale: hovered || isActive ? 1.3 : 1
+            color: isActive || hovered ? Dracula.cyan : "#888be8fd"
 
             Behavior on scale {
                 NumberAnimation { duration: 150 }
@@ -35,10 +36,9 @@ RowLayout {
             //   NumberAnimation {duration: 1}
             //}
 
-            property var ws: Hyprland.workspaces.values[index]
 
             property bool isActive: {
-                return Hyprland.focusedWorkspace.id === ws.id
+                return modelData.focused;
             }
 
 
@@ -46,7 +46,7 @@ RowLayout {
                 anchors.fill: parent
                 hoverEnabled: true
 
-                onClicked: Hyprland.dispatch(`hl.dsp.focus({workspace = ${ws.id}})`)
+                onClicked: Hyprland.dispatch(`hl.dsp.focus({workspace = ${wsp.modelData.id}})`)
                 onEntered: wsp.hovered = true
                 onExited: wsp.hovered = false
             }

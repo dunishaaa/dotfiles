@@ -9,7 +9,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
     hl.exec_cmd(scrPath .. "/polkitkdeauth.sh")
-    hl.exec_cmd("waybar")
+--    hl.exec_cmd("waybar")
+    hl.exec_cmd("quickshell")
     hl.exec_cmd("blueman-applet")
     hl.exec_cmd("udiskie --no-automount --smart-tray")
     hl.exec_cmd("nm-applet --indicator")
@@ -37,7 +38,7 @@ hl.env("GDK_SCALE", "1")
 
 hl.config({
     master = {
-        new_status = "slave",
+        new_status = "master",
     },
 })
 
@@ -82,6 +83,56 @@ hl.monitor({
     mode = "1920x1080",
     position = "1920x0",
     scale = 1,
+})
+
+
+hl.config({
+    general = {
+        gaps_in = 3,
+        gaps_out = 3,
+        border_size = 1,
+        layout = "master",
+
+        -- https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
+        col = {
+            active_border = { colors = { "rgba(bd93f999)", "rgba(8be9fd99)" }, angle = 60 },
+            inactive_border = { colors = { "rgba(6272a499)" } },
+        },
+
+        --Set to true enable resizing windows by clicking and dragging on borders and gaps
+        resize_on_border = true,
+
+        -- Please see https://wiki.hypr.land/Configuring/Tearing/ before you turn this on
+        allow_tearing = false,
+
+    }
+
+})
+hl.config({
+    decoration = {
+        rounding = 10,
+        rounding_power = 2,
+
+        -- Change transparency of focused and unfocused windows
+        active_opacity = 0.92,
+        inactive_opacity = 0.90,
+
+        shadow = {
+            enabled = false,
+            range = 4,
+            render_power = 3,
+            color = "rgba(1a1a1aee)",
+        },
+
+        -- https://wiki.hypr.land/Configuring/Variables/#blur
+        blur = {
+            enabled = true,
+            size = 5,
+            passes = 6,
+            vibrancy = 0.1696,
+        }
+    }
+
 })
 
 for i = 1, 5 do
@@ -241,62 +292,14 @@ hl.animation({ leaf = "border", enabled = true, speed = 1, bezier = "liner" })
 hl.animation({ leaf = "fade", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "wind" })
 
-hl.config({
-    general = {
-        gaps_in = 1,
-        gaps_out = 1,
-        border_size = 1,
-        layout = "master",
-
-        -- https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
-        col = {
-            active_border = { colors = { "rgb(bd93f9)", "rgb(8be9fd)" }, angle = 60 },
-            inactive_border = { colors = { "rgb(6272a4)" } },
-        },
-
-        --Set to true enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = true,
-
-        -- Please see https://wiki.hypr.land/Configuring/Tearing/ before you turn this on
-        allow_tearing = false,
-
-        layout = master,
-    }
-
-})
-hl.config({
-    decoration = {
-        rounding = 0,
-        rounding_power = 0,
-
-        -- Change transparency of focused and unfocused windows
-        active_opacity = 1,
-        inactive_opacity = 0.95,
-
-        shadow = {
-            enabled = false,
-            range = 4,
-            render_power = 3,
-            color = "rgba(1a1a1aee)",
-        },
-
-        -- https://wiki.hypr.land/Configuring/Variables/#blur
-        blur = {
-            enabled = true,
-            size = 4,
-            passes = 4,
-            vibrancy = 0.1696,
-        }
-    }
-
-})
-
 --layer rule
+
 hl.layer_rule({
     match = {
       namespace = "quickshell",
     },
     blur = true,
+    ignore_alpha = 0.5,
 })
 -- windowrule = match:title Signal, workspace 5
 hl.window_rule({
@@ -317,13 +320,13 @@ hl.window_rule({
     match = {
         class = "Emacs",
     },
-    opacity = "0.95",
+    opacity = "0.90",
 })
 hl.window_rule({
     match = {
         class = "kitty",
     },
-    opacity = "0.93",
+    opacity = "0.85",
 })
 
 --NVIDIA

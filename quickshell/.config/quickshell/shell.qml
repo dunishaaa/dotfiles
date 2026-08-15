@@ -1,6 +1,7 @@
 import Quickshell
 import "modules/Bar"
+import "modules/SessionMenu"
 Scope {
-  Bar{}
+    Bar{}
+    SessionMenu{}
 }
-

@@ -51,3 +51,6 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
+
+(package! qml-ts-mode
+  :recipe (:host github :repo "xhcoding/qml-ts-mode"))

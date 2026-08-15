@@ -1,13 +1,13 @@
 import QtQuick
-import "../../../Palettes/"
+import "../../../services"
 Text{
     anchors {
-        verticalCenter: bar.verticalCenter
-        horizontalCenter: bar.horizontalCenter
+        verticalCenter: parent.verticalCenter
+        horizontalCenter: parent.horizontalCenter
     }
     text: Time.time
     color: "#dddddd"//Dracula.selection
     font.family: "Ticketing"
-    font.pixelSize: 24
+    font.pixelSize: 14
 
 }
