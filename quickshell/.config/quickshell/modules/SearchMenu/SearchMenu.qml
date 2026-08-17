@@ -4,6 +4,7 @@ import Quickshell
 import QtQuick
 import Quickshell.Wayland
 import QtQuick.Layouts
+import Quickshell.Io
 
 
 //SearchMenu
@@ -13,28 +14,61 @@ PanelWindow {
     property int searchWidth: 600
     property int searchHeight: 400
 
+    property bool open: false
+
     focusable: true
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.exclusiveZone: 0
 
 
-    visible: false
+    visible: open
     anchors.bottom: true
     color: "transparent"
     implicitWidth: root.searchWidth
     implicitHeight: root.searchHeight
 
-    onVisibleChanged: {
-        if(visible){
-            searchBar.inputText.forceActiveFocus()
+    Item {
+        id: keyHandler
+        anchors.fill: parent
+        focus: true
+        Keys.onPressed: (event) =>{
+            if(event.key == Qt.Key_Escape){
+                console.log("esc pressed")
+                root.open = false
+                event.accepted = true
+            }
         }
+    }
+
+    IpcHandler {
+        target: "appsPanel"
+
+        function open(): void{
+            root.open = true
+        }
+    }
+
+    onOpenChanged:{
+        if(open){
+            handleOpen()
+        }else{
+            handleClosing()
+        }
+    }
+
+    function handleOpen(){
+        searchBar.inputText.forceActiveFocus()
+        enterCooldowntimer.running = true
+        menu.y = 0
+    }
+    function handleClosing(){
+        menu.y = this.height - 5
+        searchBar.inputText.text = ""
     }
 
     Rectangle {
         id: menu
-        property bool hover: false
-        property bool active: false
         Behavior on y {
             NumberAnimation {duration: 200}
         }
@@ -43,7 +77,6 @@ PanelWindow {
         topRightRadius: 20
         topLeftRadius: 20
         color: "#8f282a36"
-        y: active || hover ? 0 : this.height - 5
 
         //Enter cooldown
         Timer {
@@ -51,18 +84,17 @@ PanelWindow {
             interval: 200
             running: false
             onTriggered:{
-                menu.active = true
+                root.open = true
             }
         }
 
         //exit cooldown
         Timer{
             id: exitCooldownTimer
-            interval: 700
+            interval: 500
             running: false
             onTriggered: {
-                root.visible = false
-                menu.hover = false
+                root.open = false
             }
 
         }
@@ -72,15 +104,15 @@ PanelWindow {
             interval: exitCooldownTimer.interval - 100
             running: false
             onTriggered: {
-                menu.active = false
-                menu.hover = false
             }
         }
         SearchBar{id: searchBar}
         HoverHandler {
             onHoveredChanged: {
                 if(hovered){
-                    menu.hover = true
+                    enterCooldowntimer.restart()
+                    enterCooldowntimer.running = true
+                    exitCooldownTimer.running = false
                 }else{
                     exitCooldownTimer.running = true
                 }

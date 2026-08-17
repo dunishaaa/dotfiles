@@ -24,11 +24,14 @@ PanelWindow{
         topRightRadius: 20
         topLeftRadius: 20
         color: "#8f282a36"
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            onEntered: detectionBoxTimer.running = true
-            onExited: detectionBoxTimer.running = false
+        HoverHandler {
+            onHoveredChanged: {
+                if(hovered){
+                    detectionBoxTimer.running = true
+                }else{
+                    detectionBoxTimer.running = false
+                }
+            }
 
         }
 
@@ -36,7 +39,7 @@ PanelWindow{
             id: detectionBoxTimer
             interval: 200
             running: false
-            onTriggered: root.searchMenu.visible = true
+            onTriggered: root.searchMenu.open = true
         }
     }
 

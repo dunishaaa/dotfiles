@@ -175,7 +175,8 @@ hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("systemctl suspend && hyprlock"
 --hl.bind($CONTROL SHIFT, ESCAPE, hl.dsp.exec_cmd(scrPath .. "/sysmonlaunch.sh")) -- open htop/btop if installed or default to top (system monitor")
 
 -- Rofi is toggled on/off if you repeat the key presses
-hl.bind(mainMod .. "+ A", hl.dsp.exec_cmd("pkill -x rofi || " .. scrPath .. "/rofilaunch.sh d"))   -- launch desktop applications
+--hl.bind(mainMod .. "+ A", hl.dsp.exec_cmd("pkill -x rofi || " .. scrPath .. "/rofilaunch.sh d"))   -- launch desktop applications
+hl.bind(mainMod .. "+ A", hl.dsp.exec_cmd("qs ipc call appsPanel open"))   -- launch desktop applications
 hl.bind(mainMod .. "+ tab", hl.dsp.exec_cmd("pkill -x rofi || " .. scrPath .. "/rofilaunch.sh w")) -- switch between desktop applications
 hl.bind(mainMod .. "+ R", hl.dsp.exec_cmd("pkill -x rofi || " .. scrPath .. "/rofilaunch.sh f"))   -- browse system files") --hl.bind(mainMod .. " + CTRL + L", exec, ~/dmenu-scripts/rofi-kbdistribution # change kbd layout
 

@@ -30,7 +30,7 @@ Rectangle{
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        text: root.modelData.name + "|-|"  + root.modelData.icon
+        text: root.modelData.name
         color: "white"
     }
     MouseArea {
