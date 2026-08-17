@@ -28,7 +28,6 @@ Text {
 
         onEntered: {
             root.hovered = true
-            print("entro")
         }
         onExited: root.hovered = false
     }
