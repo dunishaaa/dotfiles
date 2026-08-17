@@ -17,8 +17,8 @@ PanelWindow {
     WlrLayershell.exclusiveZone: 0
 
     color: "transparent"
-    width: 200
-    height: 70
+    implicitWidth: 200
+    implicitHeight: 70
     margins.bottom: 50
 
     PwObjectTracker {
