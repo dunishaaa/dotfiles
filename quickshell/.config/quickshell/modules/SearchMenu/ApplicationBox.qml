@@ -18,9 +18,14 @@ Rectangle{
     width: menu.width * 0.90
     height: root.width / 9
     IconImage {
+        id: appIcon
         anchors {
             left: root.left
+            verticalCenter: root.verticalCenter
+            leftMargin: 10
         }
+        implicitSize: 32
+        source: Quickshell.iconPath(root.modelData.icon, "application-x-executable")
     }
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
