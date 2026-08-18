@@ -161,7 +161,8 @@ hl.bind(mainMod .. "+ W", hl.dsp.window.float())                                
 hl.bind("ALT +  return", hl.dsp.window.fullscreen())                                 -- toggle the window on focus to fullscreen
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("hyprlock"))                              -- lock screen
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd(scrPath .. "/windowpin.sh"))      -- toggle pin on focused window
-hl.bind(mainMod .. " + backspace", hl.dsp.exec_cmd(scrPath .. "/logoutlaunch.sh 1")) -- logout menu
+--hl.bind(mainMod .. " + backspace", hl.dsp.exec_cmd(scrPath .. "/logoutlaunch.sh 1")) -- logout menu
+hl.bind(mainMod .. " + backspace", hl.dsp.exec_cmd("qs ipc call sessionMenu open")) -- logout menu
 --hl.bind(CONTROL, ESCAPE, hl.dsp.exec_cmd("killall waybar || waybar ") -- toggle waybar
 
 -- Application shortcuts

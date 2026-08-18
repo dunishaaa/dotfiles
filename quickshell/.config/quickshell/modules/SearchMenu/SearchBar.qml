@@ -9,6 +9,7 @@ Rectangle {
     width: parent.width
     height: parent.height * (1-.83)
     color: "transparent"
+    signal escapePressed()
 
     anchors {
         bottom: parent.bottom
@@ -26,6 +27,13 @@ Rectangle {
         TextInput {
             id: inputTextComponent
             focus: true
+
+            Keys.onPressed: (event) =>{
+                if(event.key == Qt.Key_Escape){
+                    root.escapePressed()
+                    event.accepted = true
+                }
+            }
 
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left

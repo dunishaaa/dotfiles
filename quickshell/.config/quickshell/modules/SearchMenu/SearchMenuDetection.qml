@@ -32,7 +32,6 @@ PanelWindow{
                     detectionBoxTimer.running = false
                 }
             }
-
         }
 
         Timer {

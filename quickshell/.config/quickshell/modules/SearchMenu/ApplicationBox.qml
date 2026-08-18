@@ -13,9 +13,9 @@ Rectangle{
 
     radius: 5
     color: hovered ? "#383A45" :"#ff282a36"
-    scale: hovered ? 1.02 : 1
+    scale: hovered ? 1.03 : 1
 
-    width: menu.width * 0.90
+    width: menu.width * 0.87
     height: root.width / 9
     IconImage {
         id: appIcon

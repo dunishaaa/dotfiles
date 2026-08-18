@@ -28,19 +28,6 @@ PanelWindow {
     implicitWidth: root.searchWidth
     implicitHeight: root.searchHeight
 
-    Item {
-        id: keyHandler
-        anchors.fill: parent
-        focus: true
-        Keys.onPressed: (event) =>{
-            if(event.key == Qt.Key_Escape){
-                console.log("esc pressed")
-                root.open = false
-                event.accepted = true
-            }
-        }
-    }
-
     IpcHandler {
         target: "appsPanel"
 
@@ -61,15 +48,20 @@ PanelWindow {
         searchBar.inputText.forceActiveFocus()
         enterCooldowntimer.running = true
         menu.y = 0
+        menu.scale = 1
     }
     function handleClosing(){
         menu.y = this.height - 5
+        menu.scale = 0
         searchBar.inputText.text = ""
     }
 
     Rectangle {
         id: menu
         Behavior on y {
+            NumberAnimation {duration: 200}
+        }
+        Behavior on scale {
             NumberAnimation {duration: 200}
         }
         width: root.searchWidth
@@ -106,7 +98,12 @@ PanelWindow {
             onTriggered: {
             }
         }
-        SearchBar{id: searchBar}
+        SearchBar{
+            id: searchBar
+            onEscapePressed: (event) => {
+                root.open = false
+            }
+        }
         HoverHandler {
             onHoveredChanged: {
                 if(hovered){
@@ -151,7 +148,6 @@ PanelWindow {
                                 }
                             })
                         }
-                        //model: 10
                         ApplicationBox{}
                     }
                 }
