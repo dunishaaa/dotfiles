@@ -10,6 +10,9 @@ Rectangle {
     height: parent.height * (1-.83)
     color: "transparent"
     signal escapePressed()
+    signal upPressed()
+    signal downPressed()
+    signal returnPressed()
 
     anchors {
         bottom: parent.bottom
@@ -32,7 +35,14 @@ Rectangle {
                 if(event.key == Qt.Key_Escape){
                     root.escapePressed()
                     event.accepted = true
+                } else if(event.key == Qt.Key_Up){
+                    root.upPressed()
+                }else if(event.key == Qt.Key_Down){
+                    root.downPressed()
+                }else if(event.key == Qt.Key_Return){
+                    root.returnPressed()
                 }
+
             }
 
             anchors.verticalCenter: parent.verticalCenter
@@ -44,7 +54,6 @@ Rectangle {
             font.family: "Ticketing"
             font.pixelSize: 20
             selectByMouse: true
-            onTextChanged: console.log(text)
 
         }
         Text {

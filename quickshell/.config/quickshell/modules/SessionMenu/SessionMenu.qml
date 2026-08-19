@@ -27,9 +27,19 @@ PanelWindow{
         focus: true
         Keys.onPressed: (event) => {
             if(event.key == Qt.Key_Escape){
-                SessionState.open = false
                 event.accepted = true
+            }else if(event.key == Qt.Key_P){
+                console.log("power off")
+                shutdownProc.running = true
+            }else if(event.key == Qt.Key_S){
+                console.log("suspend")
+                suspendProc.running = true
+            }else if(event.key == Qt.Key_L){
+                console.log("logout")
+                logoutProc.running = true
             }
+            event.accepted = true
+            SessionState.open = false
         }
     }
     onVisibleChanged: {
@@ -82,12 +92,10 @@ PanelWindow{
         id: suspendProc
         running: false
         command: ["sh", "-c", "systemctl suspend && hyprlock"]
-        //command: ["notify-send", "a mimir"]
     }
     Process {
         id: logoutProc
         running: false
-        //command: ["sh", "-c", "hyprshutdown"]
         command: ["hyprctl", "dispatch", "hl.dsp.exit()"]
     }
 

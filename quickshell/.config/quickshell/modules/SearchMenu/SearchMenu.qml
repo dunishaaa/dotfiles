@@ -11,8 +11,8 @@ import Quickshell.Io
 PanelWindow {
     id: root
 
-    property int searchWidth: 600
-    property int searchHeight: 400
+    property int searchWidth: menu.width*1.8
+    property int searchHeight: menu.height * 1.8
 
     property bool open: false
 
@@ -21,12 +21,11 @@ PanelWindow {
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.exclusiveZone: 0
 
-
     visible: open
     anchors.bottom: true
-    color: "transparent"
     implicitWidth: root.searchWidth
     implicitHeight: root.searchHeight
+    color: "transparent"
 
     IpcHandler {
         target: "appsPanel"
@@ -52,6 +51,7 @@ PanelWindow {
     }
     function handleClosing(){
         menu.y = this.height - 5
+        results.currentIndex = 0
         menu.scale = 0
         searchBar.inputText.text = ""
     }
@@ -59,16 +59,25 @@ PanelWindow {
     Rectangle {
         id: menu
         Behavior on y {
-            NumberAnimation {duration: 200}
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InQuad
+            }
         }
         Behavior on scale {
-            NumberAnimation {duration: 200}
+            NumberAnimation {
+                duration: 450
+                easing.overshoot: 1.8
+                easing.type: Easing.OutBack
+            }
         }
-        width: root.searchWidth
-        height: root.searchHeight
+        width: 600//root.searchWidth
+        height: 400//root.searchHeight
         topRightRadius: 20
         topLeftRadius: 20
         color: "#8f282a36"
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
 
         //Enter cooldown
         Timer {
@@ -98,11 +107,17 @@ PanelWindow {
             onTriggered: {
             }
         }
+
         SearchBar{
             id: searchBar
-            onEscapePressed: (event) => {
+            onEscapePressed: root.open = false
+            onUpPressed: results.selectPrevious()
+            onDownPressed: results.selectNext()
+            onReturnPressed: {
+                results.launchCurrent()
                 root.open = false
             }
+            onInputTextChanged: results.currentIndex = 0
         }
         HoverHandler {
             onHoveredChanged: {
@@ -117,40 +132,54 @@ PanelWindow {
         }
         Rectangle {
             id: applicationsBox
-            color: "transparent"
             width: parent.width * 0.9
             height: parent.height * 0.83
-
+            color: "transparent"
             anchors{
                 horizontalCenter: parent.horizontalCenter
             }
-            Flickable {
-                anchors.fill: parent
-                contentWidth: width
-                contentHeight: columnLayout.height
-                clip: true
-                ColumnLayout {
-                    id: columnLayout
-                    spacing:  10
-                    anchors {
-                        top: parent.top
-                        topMargin: 10
-                        horizontalCenter: parent.horizontalCenter
-                    }
-                    Repeater{
-                        model: {
-                            DesktopEntries.applications.values.filter(app =>{
-                                if(searchBar.inputText.text.length ===  0){
-                                    return true
-                                }else{
+            ListView{
+                id: results
+                currentIndex: 0
 
-                                    return app.name.toLowerCase().includes(searchBar.inputText.text.toLocaleLowerCase())
-                                }
-                            })
-                        }
-                        ApplicationBox{}
+                anchors {
+                    fill: parent
+                    topMargin: 10
+                }
+
+                function selectNext() {
+                    if (currentIndex < count - 1){
+                        currentIndex++
                     }
                 }
+
+                function selectPrevious() {
+                    if (currentIndex > 0){
+                        currentIndex--
+                    }
+                }
+
+                function launchCurrent() {
+                    if (currentItem){
+                        currentItem.launch()
+                    }
+                }
+                contentWidth: width
+                contentHeight: parent.height
+                clip: true
+                spacing: 10
+
+                //highlight: Rectangle {color: "lightsteelblue"; radius: 5}
+                model: {
+                    if(searchBar.inputText.text.length ===  0){
+                        return DesktopEntries.applications
+                    }else{
+                        DesktopEntries.applications.values.filter(app =>{
+                            return app.name.toLowerCase().includes(searchBar.inputText.text.toLocaleLowerCase())
+                        })
+                    }
+                }
+                delegate: ApplicationBox{}
             }
         }
     }
