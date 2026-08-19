@@ -29,27 +29,55 @@ Variants{
             left: true
         }
         margins {
-            right: 300
-            left: 300
-            //top: 5
             bottom: 5
         }
-        Rectangle {
-            id: bar
+        Item{
             anchors.fill: parent
-            //radius: 16
-            bottomLeftRadius: 16
-            bottomRightRadius: 16
-            color: "#7f282a36"
-            //color: "#ff0000"
-            Workspaces{
-                monitor: Hyprland.monitorFor(panel.screen)
+            Rectangle {
+                id: centerBar
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                //radius: 16
+                bottomLeftRadius: 16
+                bottomRightRadius: 16
+                color: "#7f282a36"
+                height: panel.implicitHeight
+                width: 80
+                //color: "#ff0000"
+                ClockWidget {}
+                //SessionButton{
+                 //   id: sessionButton
+                //}
             }
-            ClockWidget {}
-            Volume {}
-            SessionButton{
-                id: sessionButton
+
+            Rectangle {
+                id: leftBar
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.leftMargin: 20
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 100
+                        easing.overshoot: 20
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                height: panel.implicitHeight
+                width: 30+(workspaces.activeWorkspaces * 10) + (workspaces.activeWorkspaces * 5)
+                //radius: 16
+                bottomLeftRadius: 16
+                bottomRightRadius: 16
+                color: "#7f282a36"
+                //color: "#ff0000"
+                Workspaces{
+                    id: workspaces
+                    monitor: Hyprland.monitorFor(panel.screen)
+                }
             }
+
         }
     }
+
 }

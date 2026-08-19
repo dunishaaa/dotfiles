@@ -7,7 +7,7 @@ Singleton {
 
   readonly property string time: {
     //Qt.formatDateTime(clock.date, "dd dddd MMM  HH:mm ")
-    Qt.formatDateTime(clock.date, "HH\nmm")
+    Qt.formatDateTime(clock.date, "HH:mm")
   }
 
   SystemClock {

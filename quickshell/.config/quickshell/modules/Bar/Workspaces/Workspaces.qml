@@ -8,14 +8,15 @@ import "../../../Palettes"
 RowLayout {
     id: root
     required property HyprlandMonitor monitor
+    property int activeWorkspaces
     spacing: 5
     anchors {
-        leftMargin: 20
-        left: parent.left
         verticalCenter: parent.verticalCenter
+        horizontalCenter: parent.horizontalCenter
     }
     Repeater {
         model: Hyprland.workspaces.values.filter(ws => ws.monitor === root.monitor)
+        onCountChanged: root.activeWorkspaces = count
         Rectangle {
             id: wsp
             required property int index
@@ -32,9 +33,9 @@ RowLayout {
             Behavior on scale {
                 NumberAnimation { duration: 150 }
             }
-            //Behavior on color {
-            //   NumberAnimation {duration: 1}
-            //}
+            Behavior on width{
+               NumberAnimation {duration: 150}
+            }
 
 
             property bool isActive: {
