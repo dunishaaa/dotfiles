@@ -3,16 +3,24 @@ import Quickshell
 import QtQuick
 
 Singleton {
-  id: root
+    id: root
 
-  readonly property string time: {
-    //Qt.formatDateTime(clock.date, "dd dddd MMM  HH:mm ")
-    Qt.formatDateTime(clock.date, "HH:mm")
-  }
+    function giveTimeFormat(format: string): string{
+        if(format == "full"){
+            return Qt.formatDateTime(clock.date, "HH:mm MMM dd, ddd yyyy")
+        }else if(format == "time"){
+            return Qt.formatDateTime(clock.date, "HH:mm")
+        }
+    }
 
-  SystemClock {
-    id: clock
-    precision: SystemClock.Minutes
-  }
+    readonly property string time: {
+        //Qt.formatDateTime(clock.date, "dd dddd MMM  HH:mm ")
+        Qt.formatDateTime(clock.date, "HH:mm MMM dd, ddd yyyy")
+    }
+
+    SystemClock {
+        id: clock
+        precision: SystemClock.Minutes
+    }
 
 }

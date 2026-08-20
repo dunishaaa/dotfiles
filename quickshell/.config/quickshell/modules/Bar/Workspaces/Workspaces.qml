@@ -1,57 +1,78 @@
-import Quickshell // for PanelWindow
+pragma ComponentBehavior: Bound
 import Quickshell.Hyprland
 import QtQuick // for Text
 import QtQuick.Layouts // for Text
 
 
 import "../../../Palettes"
-RowLayout {
+import "../"
+
+
+BarBox {
     id: root
     required property HyprlandMonitor monitor
-    property int activeWorkspaces
-    spacing: 5
-    anchors {
-        verticalCenter: parent.verticalCenter
-        horizontalCenter: parent.horizontalCenter
+
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.leftMargin: 20
+
+    boxHeight: parent.height
+
+    width: {
+        return 30 +
+            (rowLayout.activeWorkspaces * rowLayout.workspaceWidth) +
+            (rowLayout.activeWorkspaces * rowLayout.spacing)
     }
-    Repeater {
-        model: Hyprland.workspaces.values.filter(ws => ws.monitor === root.monitor)
-        onCountChanged: root.activeWorkspaces = count
-        Rectangle {
-            id: wsp
-            required property int index
-            required property HyprlandWorkspace modelData
-            property bool hovered: false
 
-            width: 10
-            height: 10
-            radius: 9
+    RowLayout {
+        id: rowLayout
+        property int activeWorkspaces
+        property int workspaceWidth: 10
+        spacing: 5
+        anchors {
+            verticalCenter: parent.verticalCenter
+            horizontalCenter: parent.horizontalCenter
+        }
+        Repeater {
+            model: Hyprland.workspaces.values.filter(ws => ws.monitor === root.monitor)
+            onCountChanged: rowLayout.activeWorkspaces = count
+            Rectangle {
+                id: wsp
+                required property int index
+                required property HyprlandWorkspace modelData
+                property bool hovered: false
 
-            scale: hovered || isActive ? 1.3 : 1
-            color: isActive || hovered ? Dracula.cyan : "#888be8fd"
+                width: rowLayout.workspaceWidth
+                height: 10
+                radius: 9
 
-            Behavior on scale {
-                NumberAnimation { duration: 150 }
-            }
-            Behavior on width{
-               NumberAnimation {duration: 150}
-            }
+                scale: hovered || isActive ? 1.3 : 1
+                color: isActive || hovered ? Dracula.cyan : "#888be8fd"
+
+                Behavior on scale {
+                    NumberAnimation { duration: 150 }
+                }
+                Behavior on width{
+                    NumberAnimation {duration: 150}
+                }
 
 
-            property bool isActive: {
-                return modelData.focused;
-            }
+                property bool isActive: {
+                    return modelData.focused;
+                }
 
 
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
 
-                onClicked: Hyprland.dispatch(`hl.dsp.focus({workspace = ${wsp.modelData.id}})`)
-                onEntered: wsp.hovered = true
-                onExited: wsp.hovered = false
+                    onClicked: Hyprland.dispatch(`hl.dsp.focus({workspace = ${wsp.modelData.id}})`)
+                    onEntered: wsp.hovered = true
+                    onExited: wsp.hovered = false
+                }
             }
         }
+
     }
 
 }
