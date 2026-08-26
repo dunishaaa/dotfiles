@@ -14,11 +14,12 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("blueman-applet")
     hl.exec_cmd("udiskie --no-automount --smart-tray")
     hl.exec_cmd("nm-applet --indicator")
-    hl.exec_cmd("dunst")
+--    hl.exec_cmd("dunst")
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
     --hl.exec_cmd(scrPath .. "/swwwallpaper.sh ")
-    hl.exec_cmd("hyprpaper")
+--    hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("awww-daemon")
     hl.exec_cmd(scrPath .. "/batterynotify.sh")
     hl.exec_cmd("systemctl --user start kanata.service")
 end)
@@ -151,6 +152,7 @@ file = "thunar"
 browser = "firefox"
 pdfReader = "okular"
 
+hl.bind(mainMod .. "+ N", hl.dsp.exec_cmd("notify-send \"noti de prueba\" \"cuerpo cuerpo cuerpo cuerpo cuerpo cuerpo\""))
 -- Window/Session actions
 --hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(scrPath .. "/dontkillsteam.sh")) -- killactive, kill the window on focus
 hl.bind(mainMod .. "+ Q", hl.dsp.window.close())

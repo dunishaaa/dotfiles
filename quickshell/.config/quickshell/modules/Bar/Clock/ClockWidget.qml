@@ -1,24 +1,36 @@
 import QtQuick
 import "../../../services"
 import "../"
+
+//ClockWidget.qml
 BarBox {
     id: root
     boxHeight: parent.height
+//    property bool hovered: hoverHandler.hovered
     width: {
-        return (hoverHandler.hovered? fullTimeText.width : timeText.width) + 40
+        if(timeFormat == "full"){
+            return fullTimeText.width + 40
+        }else{
+            return timeText.width + 40
+        }
     }
 
     property string timeFormat: "time"
 
-
-    anchors {
+       anchors {
         top: parent.top
         horizontalCenter: parent.horizontalCenter
-        verticalCenter: parent.verticalCenter
     }
 
     Text{
         id: timeText
+
+        Behavior on opacity{
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
 
         anchors.centerIn: parent
 
@@ -30,6 +42,12 @@ BarBox {
 
         opacity: root.timeFormat === "time" ? 1 : 0
 
+
+
+    }
+    Text {
+        id: fullTimeText
+
         Behavior on opacity{
             NumberAnimation {
                 duration: 200
@@ -37,36 +55,31 @@ BarBox {
             }
         }
 
-
-    }
-    Text {
-        id: fullTimeText
         anchors.centerIn: parent
 
         text: Time.giveTimeFormat("full")
 
         color: "#dddddd"//Dracula.selection
         font.family: "Ticketing"
-        font.pixelSize: 14
+        font.pixelSize: timeText.font.pixelSize + 3
 
         opacity: root.timeFormat === "full" ? 1 : 0
 
-        Behavior on opacity{
-            NumberAnimation {
-                duration: 200
-                easing.type: Easing.InOutQuad
-            }
-        }
+
 
 
     }
 
-    HoverHandler{
-        id: hoverHandler
-        onHoveredChanged: {
-            root.timeFormat = hovered ? "full":"time"
-        }
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            if(root.timeFormat == "full"){
+                root.timeFormat = "time"
+            }else{
+                root.timeFormat = "full"
+            }
+        }
     }
 
 }

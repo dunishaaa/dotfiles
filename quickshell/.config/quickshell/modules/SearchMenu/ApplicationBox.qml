@@ -2,30 +2,24 @@
 import QtQuick
 import Quickshell
 import Quickshell.Widgets
+import "../../components"
 
 //ApplicationBox
-Rectangle{
+StyledBox{
     id: root
     required property DesktopEntry modelData
     required property int index
     property bool hovered: false
     property bool selected: ListView.isCurrentItem
-
-    Behavior on scale {
-        NumberAnimation {
-            duration: 100
-            easing.type: Easing.InQuad
-        }
-    }
+    hoverColor: "#ee2e303c"
+    color: selected ? hoverColor:baseColor
+    scale: selected ? scaleHover:1
 
     function launch(){
         root.modelData.execute()
     }
 
 
-    radius: 5
-    color: hovered || selected ? "#383A45" :"#ff282a36"
-    scale: hovered || selected ? 1.03 : 1
 
     width: menu.width * 0.87
     height: root.width / 9

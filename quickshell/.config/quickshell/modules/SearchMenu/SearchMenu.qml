@@ -11,8 +11,8 @@ import Quickshell.Io
 PanelWindow {
     id: root
 
-    property int searchWidth: menu.width*1.8
-    property int searchHeight: menu.height * 1.8
+    property int searchWidth: menu.width
+    property int searchHeight: menu.height
 
     property bool open: false
 
@@ -25,6 +25,7 @@ PanelWindow {
     anchors.bottom: true
     implicitWidth: root.searchWidth
     implicitHeight: root.searchHeight
+
     color: "transparent"
 
     IpcHandler {
@@ -47,12 +48,10 @@ PanelWindow {
         searchBar.inputText.forceActiveFocus()
         enterCooldowntimer.running = true
         menu.y = 0
-        menu.scale = 1
     }
     function handleClosing(){
-        menu.y = this.height - 5
+        menu.y = this.height
         results.currentIndex = 0
-        menu.scale = 0
         searchBar.inputText.text = ""
     }
 
@@ -60,7 +59,7 @@ PanelWindow {
         id: menu
         Behavior on y {
             NumberAnimation {
-                duration: 200
+                duration: 800
                 easing.type: Easing.InQuad
             }
         }
@@ -78,6 +77,7 @@ PanelWindow {
         color: "#8f282a36"
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
+        y: height
 
         //Enter cooldown
         Timer {

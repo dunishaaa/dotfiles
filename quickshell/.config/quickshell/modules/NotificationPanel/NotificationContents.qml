@@ -1,0 +1,68 @@
+pragma ComponentBehavior: Bound
+
+import QtQuick // for Text
+import QtQml
+import Quickshell.Services.Notifications
+import "../../components"
+
+//NotificationContents.qml
+StyledBox {
+    id: root
+    required property Notification modelData
+    anchors.horizontalCenter: parent.horizontalCenter
+
+    width: parent.width - 20
+    height:  80
+
+    //Notification Image
+    Rectangle {
+        id: notificationImg
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            margins: 20
+        }
+        color: "red"
+        height: 50
+        width: 50
+    }
+
+    Rectangle {
+        id: notificationTextBox
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: notificationImg.right
+            margins: 10
+        }
+        height: 50
+        width: 265
+        color: "transparent"
+        Text {
+            id: textSummary
+            anchors {
+                left: notificationTextBox.left
+                margins: 5
+            }
+
+            text: root.modelData.summary
+            font.family: "Ticketing"
+            font.pixelSize: 16
+            color: "white"
+        }
+
+        Text {
+            id: bodySummary
+            anchors {
+                top: textSummary.bottom
+                left: notificationTextBox.left
+                topMargin: 5
+                leftMargin: 5
+            }
+            text: root.modelData.body
+            font.family: "Ticketing"
+            color: "white"
+        }
+    }
+
+
+}

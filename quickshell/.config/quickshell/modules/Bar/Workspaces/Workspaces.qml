@@ -10,13 +10,16 @@ import "../"
 
 BarBox {
     id: root
+    boxHeight: parent.height
+
     required property HyprlandMonitor monitor
 
-    anchors.left: parent.left
-    anchors.verticalCenter: parent.verticalCenter
-    anchors.leftMargin: 20
+    anchors {
+        left: parent.left
+        verticalCenter: parent.verticalCenter
+        leftMargin: 20
+    }
 
-    boxHeight: parent.height
 
     width: {
         return 30 +

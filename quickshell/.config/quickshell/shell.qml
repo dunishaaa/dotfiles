@@ -1,42 +1,57 @@
-import Quickshell
 pragma ComponentBehavior: Bound
+
+import Quickshell
 import QtQuick // for Text
-import Quickshell.Wayland
+import Quickshell.Services.Pipewire
+
 
 import "modules/Bar"
 import "modules/SessionMenu"
 import "modules/VolumeStatusBar"
 import "modules/SearchMenu"
+import "modules/NotificationPanel"
+import "services"
+import "components"
 
+//shell.qml
 Scope {
+
+    NotificationService{id: notificationService}
+
+    Bar{id: bar}
+    SessionMenu{}
+    Loader{
+        active: Pipewire.ready
+        sourceComponent: VolumeStatusBar{}
+    }
+    SearchMenu{
+        id: searchMenu
+    }
+
+    //    SearchMenuDetection{
+    //       searchMenu: searchMenu
+    //  }
+    NotificationPanel{
+        notificationService: notificationService
+    }
+    TemporalNotificationsPanel{notificationService: notificationService}
+
+    Wallpaper{}
     /*
     PanelWindow{
-
-        Rectangle{
+        implicitHeight: 300
+        implicitWidth: 400
+        color: "transparent"
+        StyledBox{
+            height: 100
+            width: 200
             anchors.centerIn: parent
-            width: 20
-            height: 20
-            color: "red"
-            scale: hover.hovered ? 3.5: 1
-            Behavior on scale {
-                NumberAnimation {duration: 100}
-            }
-            HoverHandler{
-                id: hover
 
-            }
         }
     }
     */
 
-    Bar{id: bar}
-    SessionMenu{}
-    VolumeStatusBar{}
-    SearchMenu{
-        id: searchMenu
-    }
-    SearchMenuDetection{
-        searchMenu: searchMenu
-    }
+
+
 
 }

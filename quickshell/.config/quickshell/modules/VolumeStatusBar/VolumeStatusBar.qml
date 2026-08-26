@@ -1,5 +1,6 @@
-import Quickshell
 pragma ComponentBehavior: Bound
+
+import Quickshell
 import QtQuick // for Text
 import QtQuick.Controls
 import Quickshell.Wayland
