@@ -21,12 +21,12 @@ PanelWindow {
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.exclusiveZone: 0
 
-    visible: open
+    visible: false
     anchors.bottom: true
     implicitWidth: root.searchWidth
     implicitHeight: root.searchHeight
-
     color: "transparent"
+
 
     IpcHandler {
         target: "appsPanel"
@@ -39,43 +39,79 @@ PanelWindow {
     onOpenChanged:{
         if(open){
             handleOpen()
+            console.log("Opening...")
         }else{
             handleClosing()
+            console.log("Closing...")
         }
     }
 
-    function handleOpen(){
+    function handleOpen() {
+        console.log("handleOpen")
+
+        root.visible = true
+
+        slideAnimation.stop()
+        scaleAnimation.stop()
+
+        menu.y = menu.height
+        slideAnimation.to = 0
+        scaleAnimation.to = 1
+        slideAnimation.start()
+        scaleAnimation.start()
         searchBar.inputText.forceActiveFocus()
-        enterCooldowntimer.running = true
-        menu.y = 0
     }
-    function handleClosing(){
-        menu.y = this.height
-        results.currentIndex = 0
-        searchBar.inputText.text = ""
+
+    function handleClosing() {
+        console.log("handleClosing")
+
+        root.visible = true
+
+        slideAnimation.stop()
+        scaleAnimation.stop()
+
+        slideAnimation.to = menu.height
+        scaleAnimation.to = 0.5
+        slideAnimation.start()
+        scaleAnimation.start()
     }
 
     Rectangle {
         id: menu
-        Behavior on y {
-            NumberAnimation {
-                duration: 800
-                easing.type: Easing.InQuad
+        NumberAnimation {
+            id: slideAnimation
+
+            target: menu
+            property: "y"
+
+            duration: 500
+            easing.type: Easing.OutCubic
+
+            onStarted: console.log("SLIDE STARTED")
+
+            onFinished: {
+                console.log("SLIDE FINISHED")
+
+                if (!root.open) {
+                    root.visible = false
+                    console.log("PANEL HIDDEN")
+                }
             }
         }
-        Behavior on scale {
-            NumberAnimation {
-                duration: 450
-                easing.overshoot: 1.8
-                easing.type: Easing.OutBack
-            }
+        NumberAnimation {
+            id: scaleAnimation
+            target: menu
+            property: "scale"
+            duration: 300
+            easing.type: Easing.OutCubic
         }
         width: 600//root.searchWidth
         height: 400//root.searchHeight
         topRightRadius: 20
         topLeftRadius: 20
         color: "#8f282a36"
-        anchors.bottom: parent.bottom
+        scale: 0.5
+        //anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         y: height
 
@@ -98,14 +134,6 @@ PanelWindow {
                 root.open = false
             }
 
-        }
-
-        Timer {
-            id: lowerSearchbar
-            interval: exitCooldownTimer.interval - 100
-            running: false
-            onTriggered: {
-            }
         }
 
         SearchBar{
