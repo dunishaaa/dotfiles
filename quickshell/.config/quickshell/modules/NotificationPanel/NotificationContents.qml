@@ -29,7 +29,7 @@ StyledBox {
             left: parent.left
             margins: 20
         }
-        color: "red"
+        color: "blue"
         height: 50
         width: 50
     }

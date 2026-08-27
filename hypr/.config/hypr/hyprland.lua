@@ -152,7 +152,7 @@ file = "thunar"
 browser = "firefox"
 pdfReader = "okular"
 
-hl.bind(mainMod .. "+ N", hl.dsp.exec_cmd("notify-send \"noti de prueba\" \"cuerpo cuerpo cuerpo cuerpo cuerpo cuerpo\""))
+hl.bind(mainMod .. "+ N", hl.dsp.exec_cmd("qs ipc call notificationsPanel toggle"))
 -- Window/Session actions
 --hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(scrPath .. "/dontkillsteam.sh")) -- killactive, kill the window on focus
 hl.bind(mainMod .. "+ Q", hl.dsp.window.close())

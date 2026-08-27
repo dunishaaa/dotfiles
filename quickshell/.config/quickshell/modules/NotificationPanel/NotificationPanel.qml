@@ -4,13 +4,14 @@ import Quickshell
 import QtQuick // for Text
 import QtQml
 import Quickshell.Services.Notifications
+import Quickshell.Io
 
 import "../../services"
 import "../../components"
 
 PanelWindow {
     id: root
-    visible: true
+    visible: false
     required property NotificationService notificationService
     anchors {
         top: true
@@ -22,6 +23,13 @@ PanelWindow {
     implicitHeight: 200
     exclusionMode: ExclusionMode.Ignore
 
+    IpcHandler {
+        target: "notificationsPanel"
+        function toggle(): void{
+            root.visible = !root.visible
+            panel.forceActiveFocus()
+        }
+    }
 
     Rectangle {
         id: panel
