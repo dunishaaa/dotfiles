@@ -10,6 +10,7 @@ Rectangle{
     property int styledRadius: 10
     property real scaleHover: 1.07
     property real scaleClicked: 1.15
+    property alias mouseArea: mouseArea
 
 
     color: baseColor

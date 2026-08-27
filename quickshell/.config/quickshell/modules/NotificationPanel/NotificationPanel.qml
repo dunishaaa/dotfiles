@@ -14,28 +14,56 @@ PanelWindow {
     visible: false
     required property NotificationService notificationService
     anchors {
-        top: true
         right: true
-        bottom: true
     }
     color: "transparent"
     implicitWidth: 380
-    implicitHeight: 200
+    implicitHeight: 800
     exclusionMode: ExclusionMode.Ignore
 
     IpcHandler {
         target: "notificationsPanel"
         function toggle(): void{
-            root.visible = !root.visible
-            panel.forceActiveFocus()
+            if(!root.visible){
+                console.log("Panel x = " + panel.x)
+                console.log("Opening notifications panel")
+                root.visible = true
+                console.log("2.-Panel x = " + panel.x)
+                panel.x = panel.width
+                slidePanelAnimation.to = 0
+                console.log("Starting opening animation")
+                slidePanelAnimation.start()
+            }else{
+                slidePanelAnimation.stop()
+                slidePanelAnimation.to = panel.width
+                slidePanelAnimation.start()
+            }
+
+
         }
     }
 
     Rectangle {
         id: panel
-        anchors.fill: parent
+        width: 380
+        height: 800
         color: "#80231e29"
-        radius: 16
+        topLeftRadius: 16
+        bottomLeftRadius: 16
+        x: width
+        NumberAnimation {
+            id: slidePanelAnimation
+            target: panel
+            property: "x"
+            duration: 300
+            easing.type: Easing.OutCubic
+            onFinished: {
+                if(panel.x === panel.width){
+                    root.visible = false
+                }
+            }
+        }
+
 
         StyledBox {
             id: clearBtn
@@ -54,6 +82,10 @@ PanelWindow {
                 text: "Clear notifications"
                 color: "white"
             }
+            mouseArea.onClicked : {
+                root.notificationService.untrackAllNotifications()
+            }
+
 
         }
 

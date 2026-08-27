@@ -39,5 +39,11 @@ Item{
             }
         }
     }
+    function untrackAllNotifications(){
+        let trackedNotis = notificationServer.trackedNotifications.values
+        for(let i = 0; i < trackedNotis.length; i++){
+            trackedNotis[i].dismiss()
+        }
+    }
 
 }
