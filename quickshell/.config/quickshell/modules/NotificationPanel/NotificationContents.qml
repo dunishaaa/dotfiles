@@ -2,7 +2,9 @@ pragma ComponentBehavior: Bound
 
 import QtQuick // for Text
 import QtQml
+import Quickshell
 import Quickshell.Services.Notifications
+import Quickshell.Widgets
 import "../../components"
 
 //NotificationContents.qml
@@ -22,16 +24,15 @@ StyledBox {
     }
 
     //Notification Image
-    Rectangle {
+    IconImage {
         id: notificationImg
         anchors {
             verticalCenter: parent.verticalCenter
             left: parent.left
             margins: 20
         }
-        color: "blue"
-        height: 50
-        width: 50
+        source: Quickshell.iconPath(root.modelData.appIcon, "application-x-executable")
+        implicitSize: 70
     }
 
     Item {
@@ -41,6 +42,7 @@ StyledBox {
             left: notificationImg.right
             margins: 10
         }
+
         height: 50
         width: 265
         Text {
@@ -50,7 +52,7 @@ StyledBox {
                 margins: 5
             }
 
-            text: root.modelData.summary
+            text: root.modelData.appName + " - " + root.modelData.summary
             font.family: "Ticketing"
             font.pixelSize: 16
             color: "white"

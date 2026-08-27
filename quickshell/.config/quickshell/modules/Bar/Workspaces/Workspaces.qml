@@ -1,4 +1,5 @@
 pragma ComponentBehavior: Bound
+
 import Quickshell.Hyprland
 import QtQuick // for Text
 import QtQuick.Layouts // for Text
@@ -62,6 +63,13 @@ BarBox {
 
                 property bool isActive: {
                     return modelData.focused;
+                }
+                Text {
+                    anchors.centerIn: parent
+                    text: wsp.modelData.id
+                    font.pixelSize: 7
+                    font.family: "mono"
+                    opacity: 0.6
                 }
 
 

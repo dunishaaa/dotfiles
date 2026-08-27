@@ -3,7 +3,7 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick // for Text
 import Quickshell.Services.Pipewire
-
+import Quickshell.Networking
 
 import "modules/Bar"
 import "modules/SessionMenu"
@@ -37,21 +37,20 @@ Scope {
     TemporalNotificationsPanel{notificationService: notificationService}
 
     Wallpaper{}
+    NetworkService{}
+
     /*
     PanelWindow{
         implicitHeight: 300
         implicitWidth: 400
         color: "transparent"
         StyledBox{
-            height: 100
-            width: 200
+            height: 150
+            width: 300
             anchors.centerIn: parent
+            baseColor: "blue"
 
         }
     }
     */
-
-
-
-
 }

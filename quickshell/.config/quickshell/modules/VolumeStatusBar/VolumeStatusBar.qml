@@ -13,14 +13,14 @@ PanelWindow {
 
     visible: false
 
-    anchors.bottom: true
+    anchors.top: true
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.exclusiveZone: 0
 
     color: "transparent"
-    implicitWidth: 200
-    implicitHeight: 70
-    margins.bottom: 50
+    implicitWidth: 250
+    implicitHeight: 120
+    margins.top: 120
 
     PwObjectTracker {
         id: volumeTracker
@@ -48,7 +48,7 @@ PanelWindow {
         Rectangle {
             color: "#00ff00"
             height: 5
-            width: parent.width - 30
+            width: parent.width*0.75
             radius: 15
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
