@@ -3,12 +3,11 @@ import QtQuick
 import Quickshell.Wayland
 
 //SearchBar
-Rectangle {
+Item {
     id: root
     property TextInput inputText: inputTextComponent
     width: parent.width
     height: parent.height * (1-.83)
-    color: "transparent"
     signal escapePressed()
     signal upPressed()
     signal downPressed()

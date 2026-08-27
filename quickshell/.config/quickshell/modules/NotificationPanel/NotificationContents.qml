@@ -9,10 +9,17 @@ import "../../components"
 StyledBox {
     id: root
     required property Notification modelData
-    anchors.horizontalCenter: parent.horizontalCenter
+    property alias slideAnimation: slideOutAnimation
 
-    width: parent.width - 20
-    height:  80
+    height:  90
+
+    NumberAnimation {
+        id: slideOutAnimation
+        target: root
+        property: "x"
+        duration: 300
+
+    }
 
     //Notification Image
     Rectangle {
@@ -27,7 +34,7 @@ StyledBox {
         width: 50
     }
 
-    Rectangle {
+    Item {
         id: notificationTextBox
         anchors {
             verticalCenter: parent.verticalCenter
@@ -36,7 +43,6 @@ StyledBox {
         }
         height: 50
         width: 265
-        color: "transparent"
         Text {
             id: textSummary
             anchors {

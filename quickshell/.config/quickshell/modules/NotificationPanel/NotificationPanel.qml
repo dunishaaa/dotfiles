@@ -3,13 +3,14 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick // for Text
 import QtQml
+import Quickshell.Services.Notifications
 
 import "../../services"
 import "../../components"
 
 PanelWindow {
     id: root
-    visible: false
+    visible: true
     required property NotificationService notificationService
     anchors {
         top: true
@@ -67,18 +68,33 @@ PanelWindow {
                 spacing: 10
 
                 model: root.notificationService.trackedNotifications
-                delegate: NotificationContents{
-                    id: notificationContents
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            notificationContents.modelData.tracked = false
+                delegate: Item {
+                    id: delegateRoot
+                    width: list.width
+                    height: notificationContents.height
+                    required property Notification modelData
+                    NotificationContents{
+                        id: notificationContents
+                        modelData: delegateRoot.modelData
+                        width: parent.width - 20
+                        x: 10
+                        slideAnimation.onFinished : {
+                            console.log("Delete animation finished...")
+                            modelData.tracked = false
+                        }
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                notificationContents.hoverable = false
+                                notificationContents.clickable = false
+                                notificationContents.slideAnimation.stop()
+                                notificationContents.slideAnimation.to = parent.width
+                                notificationContents.slideAnimation.start()
+                            }
                         }
                     }
-
                 }
             }
         }
     }
-
 }

@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import Quickshell.Wayland
-import QtQuick.Layouts
 import Quickshell.Io
 
 
@@ -51,15 +50,12 @@ PanelWindow {
 
         root.visible = true
 
-        slideAnimation.stop()
-        scaleAnimation.stop()
+        menuAnimaton.stop()
 
         menu.y = menu.height
         slideAnimation.to = 0
-        scaleAnimation.to = 1
-        slideAnimation.start()
-        scaleAnimation.start()
-        searchBar.inputText.forceActiveFocus()
+        opacityAnimation.to = 1
+        menuAnimaton.start()
     }
 
     function handleClosing() {
@@ -67,50 +63,58 @@ PanelWindow {
 
         root.visible = true
 
-        slideAnimation.stop()
-        scaleAnimation.stop()
+        menuAnimaton.stop()
+        searchBar.inputText.text = ""
 
         slideAnimation.to = menu.height
-        scaleAnimation.to = 0.5
-        slideAnimation.start()
-        scaleAnimation.start()
+        opacityAnimation.to = 0
+        menuAnimaton.start()
     }
 
     Rectangle {
         id: menu
-        NumberAnimation {
-            id: slideAnimation
+        ParallelAnimation {
+            id: menuAnimaton
+            NumberAnimation {
+                id: slideAnimation
 
-            target: menu
-            property: "y"
+                target: menu
+                property: "y"
 
-            duration: 500
-            easing.type: Easing.OutCubic
+                duration: 500
+                easing.type: Easing.OutCubic
 
-            onStarted: console.log("SLIDE STARTED")
+                onStarted: console.log("SLIDE STARTED")
 
+                onFinished: {
+                    console.log("SLIDE FINISHED")
+
+                                    }
+            }
+            NumberAnimation {
+                id: opacityAnimation
+                target: menu
+                property: "opacity"
+                duration: 500
+                easing.type: Easing.OutCubic
+            }
             onFinished: {
-                console.log("SLIDE FINISHED")
 
+                searchBar.inputText.forceActiveFocus()
                 if (!root.open) {
                     root.visible = false
                     console.log("PANEL HIDDEN")
                 }
+
             }
         }
-        NumberAnimation {
-            id: scaleAnimation
-            target: menu
-            property: "scale"
-            duration: 300
-            easing.type: Easing.OutCubic
-        }
+
         width: 600//root.searchWidth
         height: 400//root.searchHeight
         topRightRadius: 20
         topLeftRadius: 20
         color: "#8f282a36"
-        scale: 0.5
+        scale: 1.0
         //anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         y: height

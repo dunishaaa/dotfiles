@@ -40,24 +40,39 @@ PanelWindow {
 
         model: root.notificationService.temporalNotificationModel
 
-        delegate: NotificationContents{
-            id: notificationContents
-            required property var notification
-            modelData: notification
-            Timer {
-                interval: 5000
-                running: true
-                repeat: false
+        delegate: Item {
+            id: delegateRoot
+            width: list.width
+            height: notificationContents.height
+            required property var modelData
+            NotificationContents{
+                id: notificationContents
+                modelData: delegateRoot.modelData
+                width: parent.width - 20
+                x: 10
 
-                onTriggered: {
+                slideAnimation.onFinished: {
                     root
                         .notificationService
-                        .removeTemporalNotification(notificationContents.notification)
+                        .removeTemporalNotification(notificationContents.modelData)
                 }
 
+                Timer {
+                    interval: 5000
+                    running: true
+                    repeat: false
+                    onTriggered: {
+                        notificationContents.hoverable = false
+                        notificationContents.clickable = false
+                        notificationContents.slideAnimation.stop()
+                        notificationContents.slideAnimation.to = parent.width
+                        notificationContents.slideAnimation.start()
+                    }
+
+                }
             }
         }
+
+
     }
-
-
 }
