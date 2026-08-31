@@ -13,7 +13,7 @@ Scope {
         path: "/proc/stat"
     }
     Timer{
-        interval: 2000
+        interval: 1000
         running: true
         repeat: true
         onTriggered: root.updateCpuUsage()

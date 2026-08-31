@@ -36,11 +36,20 @@ Variants{
             }
             SessionButton{id: sessionButton}
             UtilitiesWidget{
-                id: utilitiesWidget
+                id: utilities
                 boxHeight: 28
-                width: utilitiesWidget.utilitiesWidth + 30
+                width: utilities.utilitiesWidth + 30
                 anchors.right: sessionButton.left
-                anchors.rightMargin: 10
+                anchors.rightMargin: 45
+            }
+
+            //AudioWidgets.qml
+            AudioWidget {
+                id: audio
+                boxHeight: 28
+                width: audio.sourceWidth + 30
+                anchors.left: workspaces.right
+                anchors.leftMargin: 45
             }
 
         }

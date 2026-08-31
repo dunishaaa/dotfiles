@@ -1,20 +1,24 @@
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 import "../../services"
 
 BarBox{
     id: root
-    property int utilitiesWidth: textIcon.width + cpuIcon.width
+    property real utilitiesWidth: utilities.width
     NetworkService{id: networkService}
-    Item {
-        anchors.fill: parent
+
+    RowLayout {
+        id: utilities
+        anchors{
+            centerIn: parent
+            leftMargin: 15
+            rightMargin: 15
+        }
+        spacing: 13
         Text {
-            id: textIcon
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: parent.right
-                rightMargin: 15
-            }
+            id: netIcon
+
             color: "white"
             text: {
                 //console.log("Connection from widget: " + networkService.connected)
@@ -28,18 +32,38 @@ BarBox{
         CpuService{id: cpuService}
         Text {
             id: cpuIcon
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: textIcon.right
-                rightMargin: 15
-            }
+
+
             color: "white"
-            text: `: ${Math.round(cpuService.cpuUsage * 100)}%`
+            text: {
+                let cpuUsage = String(Math.round(cpuService.cpuUsage*100))
+                if(cpuUsage.length === 1){
+                    //cpuUsage = " " + cpuUsage
+                }
+                return `  ${cpuUsage}%`
+            }
             font{
                 pixelSize: 10
                 family: "Ticketing"
             }
         }
+        RamService{id: ramService}
+        Text {
+            id: ramIcon
+
+            color: "white"
+            text: {
+                let total = Math.round(ramService.memTotal / 1000000 * 10) / 10
+                let used = Math.round(10*(total - Math.round(ramService.memAvailable/ 1000000 * 10) / 10))/10
+                return `  ${used}GB/${total}GB`
+            }
+            font{
+                pixelSize: 10
+                family: "Ticketing"
+            }
+
+        }
     }
+
 
 }

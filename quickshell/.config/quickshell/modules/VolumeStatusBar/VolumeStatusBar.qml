@@ -46,7 +46,7 @@ PanelWindow {
         color: "#8f282a36"
         radius: 5
         Rectangle {
-            color: "#00ff00"
+            color: "#a0a0a0"
             height: 5
             width: parent.width*0.75
             radius: 15
@@ -57,6 +57,7 @@ PanelWindow {
                 anchors.left: parent.left
                 height: 5
                 radius: 15
+                color: "#00ff00"
                 Behavior on width{
                     NumberAnimation {duration: 100}
                 }
