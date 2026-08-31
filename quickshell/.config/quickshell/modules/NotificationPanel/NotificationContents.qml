@@ -31,7 +31,17 @@ StyledBox {
             left: parent.left
             margins: 20
         }
-        source: Quickshell.iconPath(root.modelData.appIcon, "application-x-executable")
+        source: {
+            if(root.modelData.appIcon){
+                return Quickshell.iconPath(root.modelData.appIcon)
+            }else if(true){
+                return root.modelData.image
+            }else{
+                return Quickshell.iconPath("application-x-executable")
+            }
+
+        }
+
         implicitSize: 70
     }
 

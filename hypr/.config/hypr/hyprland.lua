@@ -173,7 +173,7 @@ hl.bind(mainMod .. "+ E", hl.dsp.exec_cmd(file))    -- open file manager
 hl.bind(mainMod .. "+ C", hl.dsp.exec_cmd(editor))  -- open vscode
 hl.bind(mainMod .. "+ F", hl.dsp.exec_cmd(browser)) -- open browser
 hl.bind(mainMod .. "+ O", hl.dsp.exec_cmd(pdfReader))
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -cn"))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -acn"))
 hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("systemctl suspend && hyprlock"))
 --hl.bind($CONTROL SHIFT, ESCAPE, hl.dsp.exec_cmd(scrPath .. "/sysmonlaunch.sh")) -- open htop/btop if installed or default to top (system monitor")
 

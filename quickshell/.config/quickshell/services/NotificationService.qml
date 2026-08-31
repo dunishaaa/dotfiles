@@ -19,9 +19,17 @@ Item{
         imageSupported: true
 
         onNotification: noti => {
-            console.log(noti.summary + ": " + noti.body)
+            console.log("---------------N O T I F I C A T I O N    E N T R Y------------")
+            console.log(`id: ${noti.id}`)
+            console.log(`summary: ${noti.summary}`)
+            console.log(`appName: ${noti.appName}`)
+            console.log(`appIcon: ${noti.appIcon}`)
+            console.log(`image: ${noti.image}`)
+            console.log(`desktopEntry: ${noti.desktopEntry}`)
+            console.log(`urgency: ${noti.urgency}`)
+            console.log(`hasInlineReply: ${noti.hasInlineReply}`)
+            console.log("------------------------------------------------------")
             noti.tracked = true
-
             temporalModel.insert(0, {
                 notification: noti
             })
@@ -40,10 +48,9 @@ Item{
         }
     }
     function untrackAllNotifications(){
-        let trackedNotis = notificationServer.trackedNotifications.values
-        for(let i = 0; i < trackedNotis.length; i++){
-            trackedNotis[i].dismiss()
-        }
+        notificationServer.trackedNotifications.values.map(noti => {
+            noti.dismiss()
+        })
     }
 
 }

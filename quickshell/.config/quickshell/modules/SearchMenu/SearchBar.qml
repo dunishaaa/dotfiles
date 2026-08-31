@@ -19,12 +19,12 @@ Item {
     }
     Rectangle{
         id: inputBox
-        color: "#88000000"
+        color: "#882c2c2c"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         height: 50
-        width: parent.width * 0.8
-        radius: 10
+        width: parent.width * 0.7
+        radius: 40
         focus: true
         TextInput {
             id: inputTextComponent

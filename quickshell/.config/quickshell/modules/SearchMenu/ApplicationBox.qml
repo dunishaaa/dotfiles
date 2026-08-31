@@ -9,11 +9,12 @@ StyledBox{
     id: root
     required property DesktopEntry modelData
     required property int index
-    property bool hovered: false
     property bool selected: ListView.isCurrentItem
-    hoverColor: "#ee2e303c"
-    color: selected ? hoverColor:baseColor
+    baseColor: "#ee110e2f"
+    hoverColor: "#ee191970"
+
     scale: selected ? scaleHover:1
+    color: selected ? hoverColor:baseColor
 
     function launch(){
         root.modelData.execute()

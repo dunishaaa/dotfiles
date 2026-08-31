@@ -38,8 +38,9 @@ Scope {
 
     Wallpaper{}
     NetworkService{}
-
     /*
+    CpuService{id: cpuService}
+
     PanelWindow{
         implicitHeight: 300
         implicitWidth: 400
@@ -49,6 +50,11 @@ Scope {
             width: 300
             anchors.centerIn: parent
             baseColor: "blue"
+            Text {
+                anchors.centerIn: parent
+                color: "white"
+                text: Math.round(cpuService.cpuUsage * 100 * 10)/10
+            }
 
         }
     }

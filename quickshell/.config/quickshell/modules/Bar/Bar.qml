@@ -35,10 +35,10 @@ Variants{
                 monitor: Hyprland.monitorFor(panel.screen)
             }
             SessionButton{id: sessionButton}
-            NetworkWidget{
-                id: netWidget
+            UtilitiesWidget{
+                id: utilitiesWidget
                 boxHeight: 28
-                width: netWidget.iconWidth + 30
+                width: utilitiesWidget.utilitiesWidth + 30
                 anchors.right: sessionButton.left
                 anchors.rightMargin: 10
             }

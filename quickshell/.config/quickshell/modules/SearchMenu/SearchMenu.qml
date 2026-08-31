@@ -113,7 +113,7 @@ PanelWindow {
         height: 400//root.searchHeight
         topRightRadius: 20
         topLeftRadius: 20
-        color: "#8f282a36"
+        color: "#8f000212"
         scale: 1.0
         //anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
@@ -164,19 +164,22 @@ PanelWindow {
         }
         Rectangle {
             id: applicationsBox
-            width: parent.width * 0.9
+            width: parent.width * 0.94
             height: parent.height * 0.83
             color: "transparent"
             anchors{
                 horizontalCenter: parent.horizontalCenter
+                top: menu.top
             }
             ListView{
                 id: results
                 currentIndex: 0
+                clip: true
+                spacing: 15
 
                 anchors {
                     fill: parent
-                    topMargin: 10
+                    topMargin: 20
                 }
 
                 function selectNext() {
@@ -196,10 +199,6 @@ PanelWindow {
                         currentItem.launch()
                     }
                 }
-                contentWidth: width
-                contentHeight: parent.height
-                clip: true
-                spacing: 10
 
                 //highlight: Rectangle {color: "lightsteelblue"; radius: 5}
                 model: {
