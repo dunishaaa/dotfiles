@@ -49,12 +49,13 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                popup.visible = !popup.visible;
+                console.log("tocasion");
+                popup.open = !popup.open;
+                barBox.boxWidth = popup.open ? 150 : sources.width + 30;
             }
         }
     }
     Popup {
         id: popup
-        visible: false
     }
 }

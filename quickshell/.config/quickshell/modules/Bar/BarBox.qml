@@ -12,13 +12,14 @@ Item {
     width: boxWidth
     Rectangle {
         id: sourceBox
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
 
         Behavior on width {
             NumberAnimation {
-                duration: 500
+                duration: 100
                 easing.overshoot: 10
-                easing.type: Easing.OutCubic
+                easing.type: Easing.Linear
             }
         }
         Behavior on scale {
