@@ -2,8 +2,9 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import QtQuick // for Text
+import QtQuick.Layouts // for Text
 import Quickshell.Services.Pipewire
-import Quickshell.Networking
+import QtQuick.Shapes
 
 import "modules/Bar"
 import "modules/SessionMenu"
@@ -16,47 +17,51 @@ import "components"
 //shell.qml
 Scope {
 
-    NotificationService{id: notificationService}
-
-    Bar{id: bar}
-    SessionMenu{}
-    Loader{
-        active: Pipewire.ready
-        sourceComponent: VolumeStatusBar{}
+    NotificationService {
+        id: notificationService
     }
-    SearchMenu{
+
+    Bar {
+        id: bar
+    }
+    SessionMenu {}
+    Loader {
+        active: Pipewire.ready
+        sourceComponent: VolumeStatusBar {}
+    }
+    SearchMenu {
         id: searchMenu
     }
 
     //    SearchMenuDetection{
     //       searchMenu: searchMenu
     //  }
-    NotificationPanel{
+    NotificationPanel {
         notificationService: notificationService
     }
-    TemporalNotificationsPanel{notificationService: notificationService}
+    TemporalNotificationsPanel {
+        notificationService: notificationService
+    }
 
-    Wallpaper{}
-    NetworkService{}
-    /*
-    CpuService{id: cpuService}
-
-    PanelWindow{
-        implicitHeight: 300
-        implicitWidth: 400
-        color: "transparent"
-        StyledBox{
-            height: 150
-            width: 300
-            anchors.centerIn: parent
-            baseColor: "blue"
-            Text {
-                anchors.centerIn: parent
-                color: "white"
-                text: Math.round(cpuService.cpuUsage * 100 * 10)/10
-            }
-
+    Wallpaper {}
+    NetworkService {}
+    PanelWindow {
+      visible: false
+        width: 300
+        height: 150
+        Shape {
+          width: 200
+          height: 150
+          ShapePath {
+            strokeWidth: 10
+            strokeColor: "blue"
+            fillColor: "red"
+            PathLine{ x: 0; y: 0}
+            PathLine{ x: 100; y: 100}
+            PathLine{ x: 200; y: 100}
+            PathLine{ x: 0; y: 0}
+          }
+            
         }
     }
-    */
 }

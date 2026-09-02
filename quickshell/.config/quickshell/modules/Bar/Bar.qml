@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 import Quickshell // for PanelWindow
 import QtQuick // for Text
 import Quickshell.Hyprland
+import Quickshell.Services.Pipewire
 import Quickshell.Networking
 
 import "Clock"
@@ -9,7 +10,7 @@ import "Workspaces"
 import "../../services/"
 
 //Bar.qml
-Variants{
+Variants {
 
     model: Quickshell.screens
     PanelWindow {
@@ -19,23 +20,26 @@ Variants{
 
         implicitHeight: 28
         color: "transparent"
-        //color: "blue"
 
         anchors {
             top: true
             right: true
             left: true
         }
-        Item{
+        Item {
             anchors.fill: parent
 
-            ClockWidget{id: clock}
-            Workspaces{
+            ClockWidget {
+                id: clock
+            }
+            Workspaces {
                 id: workspaces
                 monitor: Hyprland.monitorFor(panel.screen)
             }
-            SessionButton{id: sessionButton}
-            UtilitiesWidget{
+            SessionButton {
+                id: sessionButton
+            }
+            UtilitiesWidget {
                 id: utilities
                 boxHeight: 28
                 width: utilities.utilitiesWidth + 30
@@ -43,7 +47,6 @@ Variants{
                 anchors.rightMargin: 45
             }
 
-            //AudioWidgets.qml
             AudioWidget {
                 id: audio
                 boxHeight: 28
@@ -51,7 +54,6 @@ Variants{
                 anchors.left: workspaces.right
                 anchors.leftMargin: 45
             }
-
         }
     }
 }
