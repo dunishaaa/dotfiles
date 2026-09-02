@@ -12,7 +12,7 @@ BarBox {
 
     required property HyprlandMonitor monitor
 
-    width: {
+    boxWidth: {
         return 30 + (rowLayout.activeWorkspaces * rowLayout.workspaceWidth) + (rowLayout.activeWorkspaces * rowLayout.spacing);
     }
 

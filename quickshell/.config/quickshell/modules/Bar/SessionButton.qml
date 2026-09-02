@@ -7,7 +7,7 @@ BarBox {
 
     property bool hovered: false
 
-    width: textItem.width + 30
+    boxWidth: textItem.width + 30
 
     Text {
         id: textItem

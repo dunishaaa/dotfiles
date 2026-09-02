@@ -57,7 +57,7 @@ Variants {
             UtilitiesWidget {
                 id: utilities
                 boxHeight: parent.height * 0.9
-                width: utilities.utilitiesWidth + 30
+                boxWidth: utilities.utilitiesWidth + 30
                 anchors.right: sessionButton.left
                 anchors.rightMargin: 45
             }
@@ -65,7 +65,6 @@ Variants {
             AudioWidget {
                 id: audio
                 boxHeight: parent.height * 0.9
-                width: audio.sourceWidth + 30
                 anchors.left: workspaces.right
                 anchors.leftMargin: 45
             }

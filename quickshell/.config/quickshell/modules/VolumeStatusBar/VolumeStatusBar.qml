@@ -6,8 +6,6 @@ import QtQuick.Controls
 import Quickshell.Wayland
 import Quickshell.Services.Pipewire
 
-
-
 PanelWindow {
     id: audio
 
@@ -29,14 +27,14 @@ PanelWindow {
 
     Connections {
         target: Pipewire.preferredDefaultAudioSink.audio
-        function onVolumeChanged(){
-            audio.visible = true
-            audioPanel.scale = 1
-            volumePanelTimer.restart()
+        function onVolumeChanged() {
+            audio.visible = true;
+            audioPanel.scale = 1;
+            volumePanelTimer.restart();
         }
-        function onMutedChanged(){
-            audio.visible = true
-            volumePanelTimer.restart()
+        function onMutedChanged() {
+            audio.visible = true;
+            volumePanelTimer.restart();
         }
     }
 
@@ -48,7 +46,7 @@ PanelWindow {
         Rectangle {
             color: "#a0a0a0"
             height: 5
-            width: parent.width*0.75
+            width: parent.width * 0.75
             radius: 15
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
@@ -58,29 +56,29 @@ PanelWindow {
                 height: 5
                 radius: 15
                 color: "#00ff00"
-                Behavior on width{
-                    NumberAnimation {duration: 100}
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 100
+                    }
                 }
                 width: {
-                    let vol = Pipewire.preferredDefaultAudioSink.audio.volume
-                    return parent.width * vol
-
+                    let vol = Pipewire.preferredDefaultAudioSink.audio.volume;
+                    return parent.width * vol;
                 }
             }
         }
         Text {
+            id: volumeText
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenterOffset: 15
-
-            id: volumeText
             font.family: "Ticketing"
-            font.pixelSize: Pipewire.preferredDefaultAudioSink.audio.muted?20:12
+            font.pixelSize: Pipewire.preferredDefaultAudioSink.audio.muted ? 20 : 12
             text: {
-                if(Pipewire.preferredDefaultAudioSink.audio.muted){
-                    return ""
+                if (Pipewire.preferredDefaultAudioSink.audio.muted) {
+                    return "";
                 }
-                return Math.round(Pipewire.preferredDefaultAudioSink.audio.volume*100)
+                return Math.round(Pipewire.preferredDefaultAudioSink.audio.volume * 100);
             }
             color: "white"
         }

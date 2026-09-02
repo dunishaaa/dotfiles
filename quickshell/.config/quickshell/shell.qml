@@ -71,7 +71,6 @@ Scope {
 
     PanelWindow {
         id: x
-        color: "transparent"
         visible: false
         implicitWidth: 400
         implicitHeight: 250

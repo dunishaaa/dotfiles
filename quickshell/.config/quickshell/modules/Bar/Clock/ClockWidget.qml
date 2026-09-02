@@ -9,7 +9,7 @@ import "../AudioFrequencies"
 BarBox {
     id: root
     //    property bool hovered: hoverHandler.hovered
-    width: items.width + 40
+    boxWidth: items.width + 40
 
     property string timeFormat: "time"
 
