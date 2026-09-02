@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell
+import QtQuick.Effects
 import QtQuick // for Text
 import QtQml
 import Quickshell.Services.Notifications
@@ -23,23 +24,21 @@ PanelWindow {
 
     IpcHandler {
         target: "notificationsPanel"
-        function toggle(): void{
-            if(!root.visible){
-                console.log("Panel x = " + panel.x)
-                console.log("Opening notifications panel")
-                root.visible = true
-                console.log("2.-Panel x = " + panel.x)
-                panel.x = panel.width
-                slidePanelAnimation.to = 0
-                console.log("Starting opening animation")
-                slidePanelAnimation.start()
-            }else{
-                slidePanelAnimation.stop()
-                slidePanelAnimation.to = panel.width
-                slidePanelAnimation.start()
+        function toggle(): void {
+            if (!root.visible) {
+                console.log("Panel x = " + panel.x);
+                console.log("Opening notifications panel");
+                root.visible = true;
+                console.log("2.-Panel x = " + panel.x);
+                panel.x = panel.width;
+                slidePanelAnimation.to = 0;
+                console.log("Starting opening animation");
+                slidePanelAnimation.start();
+            } else {
+                slidePanelAnimation.stop();
+                slidePanelAnimation.to = panel.width;
+                slidePanelAnimation.start();
             }
-
-
         }
     }
 
@@ -47,7 +46,7 @@ PanelWindow {
         id: panel
         width: 380
         height: 800
-        color: "#80231e29"
+        color: "#70231e29"
         topLeftRadius: 16
         bottomLeftRadius: 16
         x: width
@@ -58,12 +57,11 @@ PanelWindow {
             duration: 300
             easing.type: Easing.OutCubic
             onFinished: {
-                if(panel.x === panel.width){
-                    root.visible = false
+                if (panel.x === panel.width) {
+                    root.visible = false;
                 }
             }
         }
-
 
         StyledBox {
             id: clearBtn
@@ -82,11 +80,9 @@ PanelWindow {
                 text: "Clear notifications"
                 color: "white"
             }
-            mouseArea.onClicked : {
-                root.notificationService.untrackAllNotifications()
+            mouseArea.onClicked: {
+                root.notificationService.untrackAllNotifications();
             }
-
-
         }
 
         Rectangle {
@@ -101,7 +97,7 @@ PanelWindow {
             ListView {
                 id: list
                 anchors {
-                    fill:parent
+                    fill: parent
                     topMargin: 10
                 }
                 clip: true
@@ -113,23 +109,23 @@ PanelWindow {
                     width: list.width
                     height: notificationContents.height
                     required property Notification modelData
-                    NotificationContents{
+                    NotificationContents {
                         id: notificationContents
                         modelData: delegateRoot.modelData
                         width: parent.width - 20
                         x: 10
-                        slideAnimation.onFinished : {
-                            console.log("Delete animation finished...")
-                            modelData.tracked = false
+                        slideAnimation.onFinished: {
+                            console.log("Delete animation finished...");
+                            modelData.tracked = false;
                         }
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                notificationContents.hoverable = false
-                                notificationContents.clickable = false
-                                notificationContents.slideAnimation.stop()
-                                notificationContents.slideAnimation.to = parent.width
-                                notificationContents.slideAnimation.start()
+                                notificationContents.hoverable = false;
+                                notificationContents.clickable = false;
+                                notificationContents.slideAnimation.stop();
+                                notificationContents.slideAnimation.to = parent.width;
+                                notificationContents.slideAnimation.start();
                             }
                         }
                     }

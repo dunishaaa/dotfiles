@@ -31,17 +31,32 @@ Variants {
 
             ClockWidget {
                 id: clock
+                boxHeight: parent.height
+                anchors {
+                    top: parent.top
+                    horizontalCenter: parent.horizontalCenter
+                }
             }
             Workspaces {
                 id: workspaces
                 monitor: Hyprland.monitorFor(panel.screen)
+                boxHeight: parent.height * 0.9
+                anchors {
+                    left: parent.left
+                    leftMargin: 20
+                }
             }
             SessionButton {
                 id: sessionButton
+                boxHeight: parent.height * 0.9
+                anchors {
+                    right: parent.right
+                    rightMargin: 20
+                }
             }
             UtilitiesWidget {
                 id: utilities
-                boxHeight: 28
+                boxHeight: parent.height * 0.9
                 width: utilities.utilitiesWidth + 30
                 anchors.right: sessionButton.left
                 anchors.rightMargin: 45
@@ -49,7 +64,7 @@ Variants {
 
             AudioWidget {
                 id: audio
-                boxHeight: 28
+                boxHeight: parent.height * 0.9
                 width: audio.sourceWidth + 30
                 anchors.left: workspaces.right
                 anchors.leftMargin: 45

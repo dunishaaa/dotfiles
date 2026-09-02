@@ -8,16 +8,10 @@ import "../AudioFrequencies"
 //ClockWidget.qml
 BarBox {
     id: root
-    boxHeight: parent.height
     //    property bool hovered: hoverHandler.hovered
     width: items.width + 40
 
     property string timeFormat: "time"
-
-    anchors {
-        top: parent.top
-        horizontalCenter: parent.horizontalCenter
-    }
 
     RowLayout {
         id: items

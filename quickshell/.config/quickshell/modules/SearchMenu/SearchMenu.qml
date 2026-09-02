@@ -5,7 +5,6 @@ import QtQuick
 import Quickshell.Wayland
 import Quickshell.Io
 
-
 //SearchMenu
 PanelWindow {
     id: root
@@ -26,49 +25,48 @@ PanelWindow {
     implicitHeight: root.searchHeight
     color: "transparent"
 
-
     IpcHandler {
         target: "appsPanel"
 
-        function open(): void{
-            root.open = true
+        function open(): void {
+            root.open = true;
         }
     }
 
-    onOpenChanged:{
-        if(open){
-            handleOpen()
-            console.log("Opening...")
-        }else{
-            handleClosing()
-            console.log("Closing...")
+    onOpenChanged: {
+        if (open) {
+            handleOpen();
+            console.log("Opening...");
+        } else {
+            handleClosing();
+            console.log("Closing...");
         }
     }
 
     function handleOpen() {
-        console.log("handleOpen")
+        console.log("handleOpen");
 
-        root.visible = true
+        root.visible = true;
 
-        menuAnimaton.stop()
+        menuAnimaton.stop();
 
-        menu.y = menu.height
-        slideAnimation.to = 0
-        opacityAnimation.to = 1
-        menuAnimaton.start()
+        menu.y = menu.height;
+        slideAnimation.to = 0;
+        opacityAnimation.to = 1;
+        menuAnimaton.start();
     }
 
     function handleClosing() {
-        console.log("handleClosing")
+        console.log("handleClosing");
 
-        root.visible = true
+        root.visible = true;
 
-        menuAnimaton.stop()
-        searchBar.inputText.text = ""
+        menuAnimaton.stop();
+        searchBar.inputText.text = "";
 
-        slideAnimation.to = menu.height
-        opacityAnimation.to = 0
-        menuAnimaton.start()
+        slideAnimation.to = menu.height;
+        opacityAnimation.to = 0;
+        menuAnimaton.start();
     }
 
     Rectangle {
@@ -87,9 +85,8 @@ PanelWindow {
                 onStarted: console.log("SLIDE STARTED")
 
                 onFinished: {
-                    console.log("SLIDE FINISHED")
-
-                                    }
+                    console.log("SLIDE FINISHED");
+                }
             }
             NumberAnimation {
                 id: opacityAnimation
@@ -99,13 +96,11 @@ PanelWindow {
                 easing.type: Easing.OutCubic
             }
             onFinished: {
-
-                searchBar.inputText.forceActiveFocus()
+                searchBar.inputText.forceActiveFocus();
                 if (!root.open) {
-                    root.visible = false
-                    console.log("PANEL HIDDEN")
+                    root.visible = false;
+                    console.log("PANEL HIDDEN");
                 }
-
             }
         }
 
@@ -113,7 +108,7 @@ PanelWindow {
         height: 400//root.searchHeight
         topRightRadius: 20
         topLeftRadius: 20
-        color: "#8f000212"
+        color: "#7f000212"
         scale: 1.0
         //anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
@@ -124,41 +119,40 @@ PanelWindow {
             id: enterCooldowntimer
             interval: 200
             running: false
-            onTriggered:{
-                root.open = true
+            onTriggered: {
+                root.open = true;
             }
         }
 
         //exit cooldown
-        Timer{
+        Timer {
             id: exitCooldownTimer
             interval: 500
             running: false
             onTriggered: {
-                root.open = false
+                root.open = false;
             }
-
         }
 
-        SearchBar{
+        SearchBar {
             id: searchBar
             onEscapePressed: root.open = false
             onUpPressed: results.selectPrevious()
             onDownPressed: results.selectNext()
             onReturnPressed: {
-                results.launchCurrent()
-                root.open = false
+                results.launchCurrent();
+                root.open = false;
             }
             onInputTextChanged: results.currentIndex = 0
         }
         HoverHandler {
             onHoveredChanged: {
-                if(hovered){
-                    enterCooldowntimer.restart()
-                    enterCooldowntimer.running = true
-                    exitCooldownTimer.running = false
-                }else{
-                    exitCooldownTimer.running = true
+                if (hovered) {
+                    enterCooldowntimer.restart();
+                    enterCooldowntimer.running = true;
+                    exitCooldownTimer.running = false;
+                } else {
+                    exitCooldownTimer.running = true;
                 }
             }
         }
@@ -167,11 +161,11 @@ PanelWindow {
             width: parent.width * 0.94
             height: parent.height * 0.83
             color: "transparent"
-            anchors{
+            anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: menu.top
             }
-            ListView{
+            ListView {
                 id: results
                 currentIndex: 0
                 clip: true
@@ -183,34 +177,34 @@ PanelWindow {
                 }
 
                 function selectNext() {
-                    if (currentIndex < count - 1){
-                        currentIndex++
+                    if (currentIndex < count - 1) {
+                        currentIndex++;
                     }
                 }
 
                 function selectPrevious() {
-                    if (currentIndex > 0){
-                        currentIndex--
+                    if (currentIndex > 0) {
+                        currentIndex--;
                     }
                 }
 
                 function launchCurrent() {
-                    if (currentItem){
-                        currentItem.launch()
+                    if (currentItem) {
+                        currentItem.launch();
                     }
                 }
 
                 //highlight: Rectangle {color: "lightsteelblue"; radius: 5}
                 model: {
-                    if(searchBar.inputText.text.length ===  0){
-                        return DesktopEntries.applications
-                    }else{
-                        DesktopEntries.applications.values.filter(app =>{
-                            return app.name.toLowerCase().includes(searchBar.inputText.text.toLocaleLowerCase())
-                        })
+                    if (searchBar.inputText.text.length === 0) {
+                        return DesktopEntries.applications;
+                    } else {
+                        DesktopEntries.applications.values.filter(app => {
+                            return app.name.toLowerCase().includes(searchBar.inputText.text.toLocaleLowerCase());
+                        });
                     }
                 }
-                delegate: ApplicationBox{}
+                delegate: ApplicationBox {}
             }
         }
     }

@@ -4,28 +4,16 @@ import Quickshell.Hyprland
 import QtQuick // for Text
 import QtQuick.Layouts // for Text
 
-
 import "../../../Palettes"
 import "../"
 
-
 BarBox {
     id: root
-    boxHeight: parent.height
 
     required property HyprlandMonitor monitor
 
-    anchors {
-        left: parent.left
-        verticalCenter: parent.verticalCenter
-        leftMargin: 20
-    }
-
-
     width: {
-        return 30 +
-            (rowLayout.activeWorkspaces * rowLayout.workspaceWidth) +
-            (rowLayout.activeWorkspaces * rowLayout.spacing)
+        return 30 + (rowLayout.activeWorkspaces * rowLayout.workspaceWidth) + (rowLayout.activeWorkspaces * rowLayout.spacing);
     }
 
     RowLayout {
@@ -54,12 +42,15 @@ BarBox {
                 color: isActive || hovered ? Dracula.cyan : "#888be8fd"
 
                 Behavior on scale {
-                    NumberAnimation { duration: 150 }
+                    NumberAnimation {
+                        duration: 150
+                    }
                 }
-                Behavior on width{
-                    NumberAnimation {duration: 150}
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 150
+                    }
                 }
-
 
                 property bool isActive: {
                     return modelData.focused;
@@ -72,7 +63,6 @@ BarBox {
                     opacity: 0.6
                 }
 
-
                 MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true
@@ -83,7 +73,5 @@ BarBox {
                 }
             }
         }
-
     }
-
 }
