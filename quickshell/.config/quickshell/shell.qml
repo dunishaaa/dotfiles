@@ -69,11 +69,15 @@ Scope {
    }
    */
 
+    /*
     PanelWindow {
         id: x
-        visible: false
+        //
+        color: "transparent"
+        //visible: false
         implicitWidth: 400
         implicitHeight: 250
         MediaPlayer {}
     }
+    */
 }

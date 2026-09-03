@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import "AudioWidget"
+import "../../services"
 
 Item {
     id: root
@@ -16,6 +17,7 @@ Item {
         boxHeight: root.boxHeight
         boxWidth: sources.width + 30
 
+        /*
         PwObjectTracker {
             id: outputTracker
             objects: [Pipewire.preferredDefaultAudioSink]
@@ -24,6 +26,7 @@ Item {
             id: inputTracker
             objects: [Pipewire.preferredDefaultAudioSource]
         }
+        */
 
         RowLayout {
             id: sources
@@ -31,7 +34,13 @@ Item {
             spacing: 13
 
             Text {
-                text: !Pipewire.preferredDefaultAudioSink.audio.muted ? "" : ""
+                // text: !Pipewire.preferredDefaultAudioSink.audio.muted ? "" : ""
+                text: {
+                    if (!Pipewire.ready) {
+                        return "";
+                    }
+                    return !PipewireService.currentSink.audio.muted ? "" : "";
+                }
                 color: "white"
                 font {
                     pixelSize: 12
@@ -39,7 +48,14 @@ Item {
             }
 
             Text {
-                text: !Pipewire.preferredDefaultAudioSource.audio.muted ? "" : ""
+                //text: !Pipewire.preferredDefaultAudioSource.audio.muted ? "" : ""
+                text: {
+                    if (!Pipewire.ready) {
+                        return "";
+                    }
+
+                    return !PipewireService.currentSource.audio.muted ? "" : "";
+                }
                 color: "white"
                 font {
                     pixelSize: 12
@@ -55,7 +71,10 @@ Item {
             }
         }
     }
-    Popup {
-        id: popup
+    Loader {
+        active: Pipewire.ready
+        sourceComponent: Popup {
+            id: popup
+        }
     }
 }

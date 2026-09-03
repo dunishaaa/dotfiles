@@ -5,7 +5,7 @@ import "../../../services"
 import "../"
 import "../AudioFrequencies"
 
-//ClockWidget.qml
+//CentralWidget.qml
 BarBox {
     id: root
     //    property bool hovered: hoverHandler.hovered

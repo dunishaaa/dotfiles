@@ -2,9 +2,11 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Services.Mpris
 
 import "../services/"
 
+//AudioFrequencies.qml
 RowLayout {
     id: root
 
@@ -17,10 +19,21 @@ RowLayout {
     required property int maxBarHeight
     required property int barRadius
     property var qtAlignment: Qt.AlignVCenter
-    property bool open: true
+    property bool open: false
     property string barColor: "#c3c1ee"
+    visible: false
 
-    visible: true
+    Loader {
+
+        active: Mpris.players.values.length > 0
+
+        sourceComponent: MprisService {
+            id: mpris
+            player.onPlaybackStateChanged: {
+                root.open = mpris.player.playbackState === MprisPlaybackState.Playing;
+            }
+        }
+    }
 
     Layout.preferredHeight: root.boxHeight
 

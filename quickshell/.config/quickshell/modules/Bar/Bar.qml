@@ -5,7 +5,7 @@ import Quickshell.Hyprland
 import Quickshell.Services.Pipewire
 import Quickshell.Networking
 
-import "Clock"
+import "CentralWidget"
 import "Workspaces"
 import "../../services/"
 
@@ -29,7 +29,7 @@ Variants {
         Item {
             anchors.fill: parent
 
-            ClockWidget {
+            CentralWidget {
                 id: clock
                 boxHeight: parent.height
                 anchors {
