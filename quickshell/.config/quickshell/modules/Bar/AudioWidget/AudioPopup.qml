@@ -11,8 +11,6 @@ Popup {
 
     DropdownBox {
         id: popup
-        boxHeight: parent.height
-        boxWidth: parent.width
         width: parent.width
         height: parent.height
         y: 0

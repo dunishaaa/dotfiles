@@ -7,6 +7,7 @@ import Quickshell.Networking
 
 import "CentralWidget"
 import "Workspaces"
+import "AudioWidget"
 import "../../services/"
 
 //Bar.qml

@@ -9,7 +9,7 @@ Item {
     required property int boxWidth
 
     property real collapsedWidth: boxWidth
-    property real exandedWidth: boxWidth
+    property real extendedWidth: boxWidth
 
     property string backgroundColor: "#80282a36"
 
@@ -23,14 +23,14 @@ Item {
     property real currentWidth: collapsedWidth
 
     height: boxHeight
-    width: boxWidth
+    width: currentWidth
 
     function openPopup() {
-        if (!enablePopup || !popup)
-            return;
         if (expanded)
             return;
+
         expanded = true;
+        console.log("Opening popup...");
         expandAnim.start();
     }
 
@@ -39,9 +39,11 @@ Item {
             return;
         if (!expanded)
             return;
+        console.log("Closing popup...");
         popup.open = false;
     }
     function togglePopup() {
+        console.log("Toggle popup...");
         if (!popup)
             return;
         if (popup.open)
@@ -53,7 +55,7 @@ Item {
     Rectangle {
         id: sourceBox
 
-        width: parent.width
+        width: root.width
         height: parent.height
 
         bottomLeftRadius: 16
@@ -77,6 +79,7 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: {
+            console.log("Clicked");
             root.togglePopup();
         }
     }
@@ -86,13 +89,16 @@ Item {
         property: "currentWidth"
 
         from: root.collapsedWidth + 30
-        to: root.exandedWidth
+        to: root.extendedWidth
 
         duration: 100
 
         easing.type: Easing.InOutQuad
-
+        onStarted: {
+            console.log("expanding");
+        }
         onFinished: {
+            console.log("expanded");
             root.popup.open = true;
         }
     }
@@ -101,7 +107,7 @@ Item {
         target: root
         property: "currentWidth"
 
-        from: root.exandedWidth
+        from: root.extendedWidth
         to: root.collapsedWidth
 
         duration: 100
@@ -109,6 +115,7 @@ Item {
         easing.type: Easing.InOutQuad
 
         onFinished: {
+            console.log("colapsed");
             root.expanded = false;
         }
     }
