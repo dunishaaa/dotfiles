@@ -1,9 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Services.Pipewire
 import "../../../services"
-import "../"
 import "../AudioFrequencies"
+import "../../../components"
 
 //CentralWidget.qml
 BarBox {

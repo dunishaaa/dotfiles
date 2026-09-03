@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell.Io
 import "../SessionMenu"
+import "../../components"
 
 BarBox {
     id: root

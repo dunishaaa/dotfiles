@@ -6,6 +6,7 @@ import QtQuick.Layouts // for Text
 
 import "../../../Palettes"
 import "../"
+import "../../../components"
 
 BarBox {
     id: root
