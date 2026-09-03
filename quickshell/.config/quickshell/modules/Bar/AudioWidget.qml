@@ -67,14 +67,12 @@ Item {
             onClicked: {
                 console.log("tocasion");
                 popup.open = !popup.open;
-                barBox.boxWidth = popup.open ? 150 : sources.width + 30;
+                barBox.boxWidth = popup.open ? popup.width : sources.width + 30;
             }
         }
     }
-    Loader {
-        active: Pipewire.ready
-        sourceComponent: Popup {
-            id: popup
-        }
+    Popup {
+        id: popup
+        itemToAttach: root
     }
 }

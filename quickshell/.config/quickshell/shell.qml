@@ -6,6 +6,7 @@ import QtQuick.Layouts // for Text
 import Quickshell.Services.Pipewire
 import QtQuick.Shapes
 import Quickshell.Services.Mpris
+import Quickshell.Wayland
 
 import "modules/Bar"
 import "modules/SessionMenu"
@@ -80,4 +81,21 @@ Scope {
         MediaPlayer {}
     }
     */
+
+    /*
+    PanelWindow {
+        implicitWidth: 400
+        implicitHeight: 200
+    }
+    */
+    /*
+    PopupWindow {
+        anchor.rect.y: 200
+        anchor.rect.x: 200
+        width: 200
+        height: 200
+        visible: true
+    }
+    */
+
 }

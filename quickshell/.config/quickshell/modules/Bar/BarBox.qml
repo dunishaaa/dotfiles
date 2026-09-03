@@ -8,6 +8,8 @@ Item {
 
     required property int boxHeight
     required property int boxWidth
+    property string backgroundColor: "#80282a36"
+    property bool enableHover: true
     height: boxHeight
     width: boxWidth
     Rectangle {
@@ -30,6 +32,7 @@ Item {
 
         HoverHandler {
             id: hoverHandler
+            enabled: root.enableHover
             onHoveredChanged: {
                 sourceBox.scale = hovered ? 1.05 : 1;
                 sourceBox.color = hovered ? "#f0292b37" : "#80282a36";
@@ -38,6 +41,6 @@ Item {
 
         bottomLeftRadius: 16
         bottomRightRadius: 16
-        color: "#80282a36"
+        color: root.backgroundColor
     }
 }

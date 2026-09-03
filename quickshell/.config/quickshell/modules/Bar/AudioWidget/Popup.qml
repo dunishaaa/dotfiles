@@ -6,12 +6,14 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import "../../../services"
+import ".."
 
 //Popup.qml
 Scope {
     id: root
     property bool open: false
-    property real width: popup.width
+    property real width: box.implicitWidth
+    property Item itemToAttach
     onOpenChanged: {
         if (open) {
             slideAnimation.stop();
@@ -46,30 +48,23 @@ Scope {
         }
     }
 
-    PanelWindow {
+    PopupWindow {
         id: box
         color: "transparent"
         implicitHeight: 250
         implicitWidth: 150
-        exclusionMode: ExclusionMode.Ignore
-        //WlrLayershell.exclusionMode: WlrLayer.Overlay
         visible: false
-        anchors {
-            top: true
-            left: true
-        }
-        margins {
-            left: 155
-            top: 20
-        }
+        anchor.item: root.itemToAttach
 
-        Rectangle {
+        BarBox {
             id: popup
+            boxHeight: parent.height
+            boxWidth: parent.width
             width: parent.width
             height: parent.height
-            color: "transparent"
             y: 0
             visible: false
+            enableHover: false
 
             RowLayout {
                 anchors.centerIn: parent

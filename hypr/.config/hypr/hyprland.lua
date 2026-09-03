@@ -292,8 +292,10 @@ hl.layer_rule({
 		namespace = "quickshell",
 	},
 	blur = true,
+	blur_popups = true,
 	ignore_alpha = 0.2,
 })
+
 -- windowrule = match:title Signal, workspace 5
 hl.window_rule({
 	match = {
