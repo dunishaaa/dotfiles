@@ -16,17 +16,7 @@ Item {
         id: barBox
         boxHeight: root.boxHeight
         boxWidth: sources.width + 30
-
-        /*
-        PwObjectTracker {
-            id: outputTracker
-            objects: [Pipewire.preferredDefaultAudioSink]
-        }
-        PwObjectTracker {
-            id: inputTracker
-            objects: [Pipewire.preferredDefaultAudioSource]
-        }
-        */
+        enableHover: false
 
         RowLayout {
             id: sources
@@ -34,7 +24,6 @@ Item {
             spacing: 13
 
             Text {
-                // text: !Pipewire.preferredDefaultAudioSink.audio.muted ? "" : ""
                 text: {
                     if (!Pipewire.ready) {
                         return "";
@@ -48,7 +37,6 @@ Item {
             }
 
             Text {
-                //text: !Pipewire.preferredDefaultAudioSource.audio.muted ? "" : ""
                 text: {
                     if (!Pipewire.ready) {
                         return "";
@@ -65,14 +53,39 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                console.log("tocasion");
-                popup.open = !popup.open;
-                barBox.boxWidth = popup.open ? popup.width : sources.width + 30;
+                if (!popup.open) {
+                    widenAnim.start();
+                } else {
+                    popup.open = false;
+                }
             }
+        }
+        NumberAnimation {
+            id: widenAnim
+            target: barBox
+            property: "boxWidth"
+            easing.type: Easing.InOutQuad
+            duration: 100
+            from: sources.width + 30
+            to: popup.width
+            onFinished: {
+                popup.open = true;
+            }
+        }
+        NumberAnimation {
+            id: shrinkAnim
+            target: barBox
+            property: "boxWidth"
+            easing.type: Easing.InOutQuad
+            duration: 100
+            from: popup.width
+            to: sources.width + 30
+            onFinished: {}
         }
     }
     Popup {
         id: popup
         itemToAttach: root
+        shrinkAnim: shrinkAnim
     }
 }

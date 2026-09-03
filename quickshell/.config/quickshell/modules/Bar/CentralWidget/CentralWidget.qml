@@ -16,7 +16,7 @@ BarBox {
     RowLayout {
         id: items
         anchors.centerIn: root
-        spacing: 10
+        spacing: 8
         Text {
             id: fullTimeText
             visible: false
@@ -68,11 +68,11 @@ BarBox {
         FrequenciesWidget {
             id: audioFreq
             boxHeight: 28
-            numberOfBars: 12
+            numberOfBars: 14
             barHeight: root.height
-            barWidth: 4
+            barWidth: 3
             minBarHeight: root.height * 0.2
-            maxBarHeight: root.height * 0.9
+            maxBarHeight: root.height * 0.94
             spacing: 2
             barRadius: 20
         }

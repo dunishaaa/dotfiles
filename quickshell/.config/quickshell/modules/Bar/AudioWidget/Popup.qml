@@ -14,6 +14,7 @@ Scope {
     property bool open: false
     property real width: box.implicitWidth
     property Item itemToAttach
+    required property NumberAnimation shrinkAnim
     onOpenChanged: {
         if (open) {
             slideAnimation.stop();
@@ -44,7 +45,8 @@ Scope {
             if (!root.open) {
                 popup.visible = false;
                 box.visible = false;
-            }
+                root.shrinkAnim.start();
+            } else {}
         }
     }
 

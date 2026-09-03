@@ -86,15 +86,15 @@ hl.monitor({
 
 hl.config({
 	general = {
-		gaps_in = 3,
-		gaps_out = 3,
-		border_size = 1,
+		gaps_in = 10,
+		gaps_out = 20,
+		border_size = 0,
 		layout = "master",
 
 		-- https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
 		col = {
-			active_border = { colors = { "rgba(bd93f999)", "rgba(8be9fd99)" }, angle = 60 },
-			inactive_border = { colors = { "rgba(6272a499)" } },
+			active_border = { colors = { "rgba(bd93f9ff)", "rgba(8be9fdff)" }, angle = 60 },
+			inactive_border = { colors = { "rgba(00000000)" } },
 		},
 
 		--Set to true enable resizing windows by clicking and dragging on borders and gaps
@@ -106,26 +106,43 @@ hl.config({
 })
 hl.config({
 	decoration = {
-		rounding = 10,
-		rounding_power = 2,
+		rounding = 15,
+		rounding_power = 3,
 
 		-- Change transparency of focused and unfocused windows
-		active_opacity = 0.92,
-		inactive_opacity = 0.90,
+		active_opacity = 0.90,
+		inactive_opacity = 0.80,
+		dim_inactive = false,
+		dim_strength = 0.15,
+		dim_special = 0.8,
 
 		shadow = {
-			enabled = false,
-			range = 4,
-			render_power = 3,
-			color = "rgba(1a1a1aee)",
+			enabled = true,
+			range = 20,
+			render_power = 4,
+			color = "rgba(ffffff06)",
+			color_inactive = "rgba(00000092)",
+			--offset = { 0, 8 },
 		},
 
 		-- https://wiki.hypr.land/Configuring/Variables/#blur
 		blur = {
 			enabled = true,
-			size = 5,
-			passes = 6,
-			vibrancy = 0.1696,
+			size = 10,
+			passes = 5,
+			brightness = 1.5,
+			contrast = 1.5,
+			--noise = 0.13,
+			popups = true,
+			vibrancy = 0.5,
+		},
+		glow = {
+
+			enabled = true,
+			color = "rgba(ffffff55)",
+			color_inactive = "rgba(0000005f)",
+			range = 20,
+			render_power = 4,
 		},
 	},
 })
@@ -299,9 +316,10 @@ hl.layer_rule({
 -- windowrule = match:title Signal, workspace 5
 hl.window_rule({
 	match = {
-		title = "Signal",
+		class = "Signal",
 	},
 	workspace = "5",
+	no_screen_share = true,
 })
 hl.window_rule({
 	match = {
@@ -322,6 +340,13 @@ hl.window_rule({
 		class = "kitty",
 	},
 	opacity = "0.85",
+})
+
+hl.window_rule({
+	match = {
+		class = "firefox",
+	},
+	opacity = "0.92 override",
 })
 
 --NVIDIA

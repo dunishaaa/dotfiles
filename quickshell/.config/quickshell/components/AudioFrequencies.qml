@@ -23,8 +23,9 @@ RowLayout {
     property string barColor: "#c3c1ee"
     visible: false
 
-    Loader {
+    property var frequencies: CavaService.getNfrequencies(numberOfBars)
 
+    Loader {
         active: Mpris.players.values.length > 0
 
         sourceComponent: MprisService {
@@ -39,7 +40,7 @@ RowLayout {
 
     Repeater {
 
-        model: root.numberOfBars
+        model: root.frequencies.length
 
         Rectangle {
             required property int index
@@ -47,10 +48,10 @@ RowLayout {
             color: root.barColor
             radius: root.barRadius
 
-            Layout.preferredWidth: root.barWidth * CavaService.widths[index]
+            Layout.preferredWidth: root.barWidth //* CavaService.widths[index]
 
             Layout.preferredHeight: {
-                const frequency = CavaService.frequencies[index] ?? 0;
+                const frequency = root.frequencies[index] ?? 0;
 
                 const freqSize = (root.boxHeight * 0.83) * (frequency / 100);
 
