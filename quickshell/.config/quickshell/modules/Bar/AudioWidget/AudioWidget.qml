@@ -49,11 +49,13 @@ BarBox {
     popup: Popup {
         id: popup
         itemToAttach: root
+        popup: dropDownMenu
         DropdownBox {
+            id: dropDownMenu
             width: popup.width
             height: popup.height
             y: 0
-            visible: false
+            visible: true
 
             RowLayout {
                 anchors.centerIn: parent

@@ -30,7 +30,6 @@ Item {
             return;
 
         expanded = true;
-        console.log("Opening popup...");
         expandAnim.start();
     }
 
@@ -39,11 +38,9 @@ Item {
             return;
         if (!expanded)
             return;
-        console.log("Closing popup...");
         popup.open = false;
     }
     function togglePopup() {
-        console.log("Toggle popup...");
         if (!popup)
             return;
         if (popup.open)
@@ -79,7 +76,6 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            console.log("Clicked");
             root.togglePopup();
         }
     }
@@ -94,11 +90,8 @@ Item {
         duration: 100
 
         easing.type: Easing.InOutQuad
-        onStarted: {
-            console.log("expanding");
-        }
+        onStarted: {}
         onFinished: {
-            console.log("expanded");
             root.popup.open = true;
         }
     }
@@ -115,7 +108,6 @@ Item {
         easing.type: Easing.InOutQuad
 
         onFinished: {
-            console.log("colapsed");
             root.expanded = false;
         }
     }
