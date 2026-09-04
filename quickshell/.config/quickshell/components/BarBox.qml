@@ -87,7 +87,7 @@ Item {
         from: root.collapsedWidth + 30
         to: root.extendedWidth
 
-        duration: 100
+        duration: 300
 
         easing.type: Easing.InOutQuad
         onStarted: {}
@@ -103,7 +103,7 @@ Item {
         from: root.extendedWidth
         to: root.collapsedWidth
 
-        duration: 100
+        duration: 300
 
         easing.type: Easing.InOutQuad
 

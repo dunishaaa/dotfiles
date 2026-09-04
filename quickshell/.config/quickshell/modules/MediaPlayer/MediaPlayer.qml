@@ -7,15 +7,15 @@ import Quickshell.Services.Mpris
 
 import "../../services"
 
-Rectangle {
+Item {
     id: yo
     MprisService {
         id: mpris
     }
     property int mariginSpacing: 40
     anchors.fill: parent
-    color: "#80c3c1ee"
-    radius: 16
+    //color: "#80c3c1ee"
+    //radius: 16
     MouseArea {
         anchors.fill: parent
         onClicked: {
@@ -42,8 +42,14 @@ Rectangle {
         height: width
         anchors {
             top: parent.top
-            topMargin: yo.mariginSpacing
+            topMargin: yo.height * 0.25
             horizontalCenter: parent.horizontalCenter
+        }
+        Image {
+            anchors.centerIn: parent
+            source: "file:////home/dunishaaa/Pictures/AMGI0458_01.jpg"
+            sourceSize.width: 4 * 50
+            sourceSize.height: 3 * 50
         }
     }
     Item {
@@ -51,8 +57,8 @@ Rectangle {
         width: parent.width * 0.5
         height: 30
         anchors {
-            top: icon.bottom
-            topMargin: 20
+            top: yo.top
+            topMargin: parent.height * 0.6
             horizontalCenter: parent.horizontalCenter
         }
         RowLayout {
@@ -61,14 +67,17 @@ Rectangle {
             Text {
                 text: ""
                 font.pixelSize: 30
+                color: "#dbc8ed"
             }
             Text {
                 text: ""//
                 font.pixelSize: 40
+                color: "#dbc8ed"
             }
             Text {
                 text: ""
                 font.pixelSize: 30
+                color: "#dbc8ed"
             }
         }
     }
@@ -92,7 +101,7 @@ Rectangle {
             height: progress.height
             anchors.left: entireBar.left
             radius: 5
-            color: "red"
+            color: "#c3c1ee"
             width: {
                 let duration = mpris.player.length;
                 let current = mpris.player.position;
@@ -107,7 +116,7 @@ Rectangle {
                 width: 12
                 height: width
                 radius: width
-                color: "blue"
+                color: "#565390"
                 y: progressBar.y - Math.abs(progressBar.height - height) / 2
                 x: progressBar.width - (width / 2)
             }
@@ -129,7 +138,7 @@ Rectangle {
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
             text: mpris.player.trackTitle
-            color: "black"
+            color: "#dbc8ed"
         }
         RowLayout {
             anchors.top: trackTitle.bottom
@@ -141,14 +150,14 @@ Rectangle {
             Text {
                 id: trackArtist
                 text: mpris.player.trackArtist + "  -"
-                color: "black"
+                color: "#dbc8ed"
                 font.pixelSize: 10
             }
 
             Text {
                 id: trackAlbum
                 text: mpris.player.trackAlbum.substring(0, 65)
-                color: "black"
+                color: "#dbc8ed"
                 font.pixelSize: 10
             }
         }

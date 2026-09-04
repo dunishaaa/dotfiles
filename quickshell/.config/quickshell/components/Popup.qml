@@ -27,9 +27,9 @@ PopupWindow {
         id: slideAnimation
         target: root.popup
         property: "y"
-        easing.type: Easing.InOutQuad
+        easing.type: Easing.OutCubic
         easing.overshoot: 40
-        duration: 200
+        duration: 300
         onFinished: {
             if (root.open) {
                 root.shown();
