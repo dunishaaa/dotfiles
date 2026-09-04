@@ -49,7 +49,6 @@ Item {
             anchors.centerIn: parent
             source: "file:////home/dunishaaa/Pictures/AMGI0458_01.jpg"
             sourceSize.width: 4 * 50
-            sourceSize.height: 3 * 50
         }
     }
     Item {
@@ -70,9 +69,18 @@ Item {
                 color: "#dbc8ed"
             }
             Text {
-                text: ""//
+                id: playIcon
+                text: mpris.player.isPlaying ? "" : ""
                 font.pixelSize: 40
                 color: "#dbc8ed"
+                MouseArea {
+                    id: mouseArea
+                    hoverEnabled: true
+                    anchors.fill: parent
+                    onClicked: mpris.player.isPlaying = !mpris.player.isPlaying
+                    onEntered: playIcon.color = "white"
+                    onExited: playIcon.color = "#dbc8ed"
+                }
             }
             Text {
                 text: ""

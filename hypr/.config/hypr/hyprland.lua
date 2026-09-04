@@ -176,6 +176,8 @@ hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("hyprlock")) -- lock screen
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd(scrPath .. "/windowpin.sh")) -- toggle pin on focused window
 --hl.bind(mainMod .. " + backspace", hl.dsp.exec_cmd(scrPath .. "/logoutlaunch.sh 1")) -- logout menu
 hl.bind(mainMod .. " + backspace", hl.dsp.exec_cmd("qs ipc call sessionMenu open")) -- logout menu
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("qs ipc call clipboardHist toggle")) -- logout menu
+
 --hl.bind(CONTROL, ESCAPE, hl.dsp.exec_cmd("killall waybar || waybar ") -- toggle waybar
 
 -- Application shortcuts
@@ -224,7 +226,7 @@ hl.bind(mainMod .. "+ ALT + left", hl.dsp.exec_cmd(scrPath .. "/swwwallpaper.sh 
 hl.bind(mainMod .. "+ SHIFT + D", hl.dsp.exec_cmd(scrPath .. "/wallbashtoggle.sh  ) -- toggle wallbash on/off")) --hl.bind($mainMod SHIFT, T, exec, pkill -x rofi || $scrPath/themeselect.sh # theme select menu
 hl.bind(mainMod .. "+ SHIFT + A", hl.dsp.exec_cmd("pkill -x rofi || $scrPath/rofiselect.sh ")) -- rofi style select menu
 hl.bind(mainMod .. "+ SHIFT + W", hl.dsp.exec_cmd("pkill -x rofi || $scrPath/swwwallselect.sh ")) -- rofi wall select menu
-hl.bind(mainMod .. "+ V", hl.dsp.exec_cmd("pkill -x rofi || $scrPath/cliphist.sh c  ")) -- open Pasteboard in screen center
+--hl.bind(mainMod .. "+ V", hl.dsp.exec_cmd("pkill -x rofi || $scrPath/cliphist.sh c  ")) -- open Pasteboard in screen center
 hl.bind(mainMod .. "+ SPACE", hl.dsp.exec_cmd(scrPath .. "/keyboardswitch.sh ")) -- change keyboard layout
 
 -- Move focus with mainMod + arrow keys

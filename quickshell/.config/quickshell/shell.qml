@@ -14,6 +14,7 @@ import "modules/VolumeStatusBar"
 import "modules/MediaPlayer"
 import "modules/SearchMenu"
 import "modules/NotificationPanel"
+import "modules/ClipboardHistory"
 import "services"
 import "components"
 
@@ -98,4 +99,5 @@ Scope {
     }
     */
 
+    ClipboardHistory {}
 }

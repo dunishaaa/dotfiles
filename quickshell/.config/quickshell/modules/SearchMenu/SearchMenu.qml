@@ -108,7 +108,7 @@ PanelWindow {
         height: 400//root.searchHeight
         topRightRadius: 20
         topLeftRadius: 20
-        color: "#7f000212"
+        color: "#8f000212"
         scale: 1.0
         //anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
