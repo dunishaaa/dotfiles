@@ -11,6 +11,7 @@ BarBox {
     boxHeight: parent.height
     boxWidth: sources.width + 30
     enableHover: false
+    animationSpeed: 200
 
     enablePopup: true
     extendedWidth: popup.width

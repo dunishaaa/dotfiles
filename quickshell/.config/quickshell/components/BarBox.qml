@@ -10,6 +10,7 @@ Item {
 
     property real collapsedWidth: boxWidth
     property real extendedWidth: boxWidth
+    property int animationSpeed: 300
 
     property string backgroundColor: "#80282a36"
 
@@ -87,7 +88,7 @@ Item {
         from: root.collapsedWidth + 30
         to: root.extendedWidth
 
-        duration: 300
+        duration: root.animationSpeed
 
         easing.type: Easing.InOutQuad
         onStarted: {}
@@ -103,7 +104,7 @@ Item {
         from: root.extendedWidth
         to: root.collapsedWidth
 
-        duration: 300
+        duration: root.animationSpeed
 
         easing.type: Easing.InOutQuad
 

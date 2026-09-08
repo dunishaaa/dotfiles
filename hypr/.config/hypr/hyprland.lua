@@ -318,7 +318,7 @@ hl.layer_rule({
 -- windowrule = match:title Signal, workspace 5
 hl.window_rule({
 	match = {
-		class = "Signal",
+		class = "signal",
 	},
 	workspace = "5",
 	no_screen_share = true,

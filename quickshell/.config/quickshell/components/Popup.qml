@@ -51,6 +51,13 @@ PopupWindow {
         }
     }
     */
+    HoverHandler {
+        onHoveredChanged: {
+            if (!hovered) {
+                root.open = false;
+            }
+        }
+    }
 
     function show() {
         root.visible = true;

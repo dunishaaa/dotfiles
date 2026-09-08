@@ -13,14 +13,14 @@ StyledBox {
     required property Notification modelData
     property alias slideAnimation: slideOutAnimation
 
-    height:  90
+    baseColor: "#330c55"
+    height: 90
 
     NumberAnimation {
         id: slideOutAnimation
         target: root
         property: "x"
         duration: 300
-
     }
 
     //Notification Image
@@ -32,14 +32,13 @@ StyledBox {
             margins: 20
         }
         source: {
-            if(root.modelData.appIcon){
-                return Quickshell.iconPath(root.modelData.appIcon)
-            }else if(true){
-                return root.modelData.image
-            }else{
-                return Quickshell.iconPath("application-x-executable")
+            if (root.modelData.appIcon) {
+                return Quickshell.iconPath(root.modelData.appIcon);
+            } else if (true) {
+                return root.modelData.image;
+            } else {
+                return Quickshell.iconPath("application-x-executable");
             }
-
         }
 
         implicitSize: 70
@@ -81,6 +80,4 @@ StyledBox {
             color: "white"
         }
     }
-
-
 }
