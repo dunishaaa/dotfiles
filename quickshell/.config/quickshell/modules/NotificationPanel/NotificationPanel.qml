@@ -46,7 +46,7 @@ PanelWindow {
         id: panel
         width: 380
         height: 800
-        color: "#70231e29"
+        color: "#231e29"
         topLeftRadius: 16
         bottomLeftRadius: 16
         x: width

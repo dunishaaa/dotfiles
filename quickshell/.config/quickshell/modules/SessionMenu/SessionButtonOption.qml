@@ -6,7 +6,7 @@
      id: root
      width: 200
      height: 150
-     color: hovered ? "#b58be8fd": "#b5282a36"
+     color: hovered ? "#8be8fd": "#484a56"
      radius: 20
      required property string symbol
      required property Process process

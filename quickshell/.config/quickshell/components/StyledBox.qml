@@ -5,9 +5,9 @@ Rectangle {
     id: root
     property bool hoverable: true
     property bool clickable: true
-    property string baseColor: "#80282a36"
-    property string hoverColor: "#802a2c38"
-    property string clickedColor: "#802e303c"
+    property string baseColor: "#282a36"
+    property string hoverColor: "#2a2c38"
+    property string clickedColor: "#2e303c"
     property int styledRadius: 10
     property real scaleHover: 1.07
     property real scaleClicked: 1.15

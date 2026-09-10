@@ -12,7 +12,7 @@ Item {
     property real extendedWidth: boxWidth
     property int animationSpeed: 300
 
-    property string backgroundColor: "#80282a36"
+    property string backgroundColor: "#282a36"
 
     property bool enableHover: true
     property bool enablePopup: false

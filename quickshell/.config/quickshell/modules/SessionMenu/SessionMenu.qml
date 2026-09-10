@@ -60,7 +60,7 @@ PanelWindow{
     Rectangle {
         anchors.fill: parent
         radius: 20
-        color: "#80282a36"
+        color: "#282a36"
     }
 
     // Menu buttons

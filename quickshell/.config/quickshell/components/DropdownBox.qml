@@ -5,7 +5,7 @@ import QtQuick.Effects
 //DropdownBox.qml
 Rectangle {
     id: sourceBox
-    property string backgroundColor: "#80282a36"
+    property string backgroundColor: "#282a36"
     width: parent.width
     height: parent.height
 

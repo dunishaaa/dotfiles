@@ -9,8 +9,8 @@ StyledBox {
     required property DesktopEntry modelData
     required property int index
     property bool selected: ListView.isCurrentItem
-    baseColor: "#20565185"
-    hoverColor: "#208b87b5"
+    baseColor: "#565185"
+    hoverColor: "#8b87b5"
 
     scale: selected ? scaleHover : 1
     color: selected ? hoverColor : baseColor
