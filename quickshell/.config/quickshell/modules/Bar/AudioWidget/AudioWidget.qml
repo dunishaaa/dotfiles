@@ -26,7 +26,7 @@ BarBox {
                 if (!Pipewire.ready) {
                     return "";
                 }
-                return !PipewireService.currentSink.audio.muted ? "" : "";
+                return !PipewireService.currentSink.audio.muted ? "" : "";
             }
             color: "white"
             font {
@@ -68,7 +68,7 @@ BarBox {
                     controllerHeight: popup.height * 0.9
                     backgroundColor: "#80282a36"
                     audioSource: PipewireService.currentSink
-                    unMutedIcon: ""
+                    unMutedIcon: ""
                     mutedIcon: ""
                     iconColor: "white"
                     iconPixelSize: 22

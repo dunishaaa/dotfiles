@@ -2,6 +2,8 @@ pragma ComponentBehavior: Bound
 import QtQuick // for Text
 import QtQuick.Effects
 
+import "../services"
+
 //BarBox.qml
 Item {
     id: root
@@ -12,7 +14,7 @@ Item {
     property real extendedWidth: boxWidth
     property int animationSpeed: 300
 
-    property string backgroundColor: "#282a36"
+    property string backgroundColor: ColorService.background//"#282a36"
 
     property bool enableHover: true
     property bool enablePopup: false
@@ -70,7 +72,7 @@ Item {
             enabled: root.enableHover
             onHoveredChanged: {
                 sourceBox.scale = hovered ? 1.05 : 1;
-                sourceBox.color = hovered ? "#f0292b37" : "#80282a36";
+                sourceBox.color = hovered ? "#4b4d59" : "#282a36";
             }
         }
     }

@@ -54,17 +54,23 @@ Rectangle {
             implicitHeight: implicitWidth
             radius: implicitWidth
             x: slider.leftPadding + (slider.availableWidth - width)
-            y: slider.height * slider.value - implicitWidth
+            y: slider.height * slider.value// - implicitWidth
             color: slider.pressed ? "#565390" : "#9d99e3"
+            Text {
+                anchors.centerIn: parent
+                text: Math.round(root.audioSource.audio.volume * 100)
+                color: "white"
+                font.pixelSize: 10
+            }
         }
         background: Rectangle {
             implicitWidth: handleRect.implicitWidth
-            implicitHeight: slider.height
+            implicitHeight: slider.height + 22
             radius: 20
             color: "#525263"
             Rectangle {
                 implicitWidth: parent.implicitWidth
-                implicitHeight: slider.height * slider.value
+                implicitHeight: slider.height * slider.value + 22
                 radius: 20
                 color: "#c3c1ee"
             }

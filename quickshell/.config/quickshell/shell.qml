@@ -21,7 +21,6 @@ import "components"
 //shell.qml
 Scope {
 
-  
     NotificationService {
         id: notificationService
     }
@@ -101,7 +100,7 @@ Scope {
     */
 
     ClipboardHistory {}
-    
+
     /*
    PanelWindow {
         implicitWidth: 400

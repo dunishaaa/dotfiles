@@ -14,6 +14,12 @@ Item {
     }
     property int mariginSpacing: 40
     anchors.fill: parent
+    function toMinutes(time) {
+        let minutes = Math.round(time / 60);
+        let seconds = Math.round(time % 60);
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        return minutes + ":" + seconds;
+    }
     //color: "#80c3c1ee"
     //radius: 16
     MouseArea {
@@ -45,19 +51,18 @@ Item {
             topMargin: yo.height * 0.17
             horizontalCenter: parent.horizontalCenter
         }
-        
+
         Image {
             anchors.fill: parent
             source: mpris.player.trackArtUrl
             fillMode: Image.PreserveAspectCrop
             onStatusChanged: {
-              if(status === Image.Ready){
-                console.log("Artwork: ", source)
-                console.log("Size: ", sourceSize.width, "x", sourceSize.height)
-              }
+                if (status === Image.Ready) {
+                    console.log("Artwork: ", source);
+                    console.log("Size: ", sourceSize.width, "x", sourceSize.height);
+                }
             }
         }
-        
     }
     Item {
         id: controls
@@ -78,7 +83,7 @@ Item {
             }
             Text {
                 id: playIcon
-                text: mpris.player.isPlaying ? "":"" 
+                text: mpris.player.isPlaying ? "" : ""
                 font.pixelSize: 40
                 color: "#dbc8ed"
                 MouseArea {
@@ -136,6 +141,24 @@ Item {
                 y: progressBar.y - Math.abs(progressBar.height - height) / 2
                 x: progressBar.width - (width / 2)
             }
+        }
+        Text {
+            id: currentTime
+            text: yo.toMinutes(mpris.player.position)
+            font.pixelSize: 8
+            anchors.right: entireBar.left
+            anchors.rightMargin: 10
+            anchors.verticalCenter: entireBar.verticalCenter
+            color: "white"
+        }
+        Text {
+            id: totalTime
+            text: yo.toMinutes(mpris.player.length)
+            font.pixelSize: 8
+            anchors.left: entireBar.right
+            anchors.leftMargin: 10
+            anchors.verticalCenter: entireBar.verticalCenter
+            color: "white"
         }
     }
 
