@@ -38,6 +38,7 @@ Variants {
                     horizontalCenter: parent.horizontalCenter
                 }
             }
+            /*
             Workspaces {
                 id: workspaces
                 monitor: Hyprland.monitorFor(panel.screen)
@@ -47,6 +48,7 @@ Variants {
                     leftMargin: 20
                 }
             }
+            */
             SessionButton {
                 id: sessionButton
                 boxHeight: parent.height * 0.9
@@ -55,6 +57,7 @@ Variants {
                     rightMargin: 20
                 }
             }
+
             UtilitiesWidget {
                 id: utilities
                 boxHeight: parent.height * 0.9
@@ -66,8 +69,8 @@ Variants {
             AudioWidget {
                 id: audio
                 boxHeight: parent.height * 0.9
-                anchors.left: workspaces.right
-                anchors.leftMargin: 45
+                anchors.left: parent.left
+                anchors.leftMargin: 20
             }
         }
     }

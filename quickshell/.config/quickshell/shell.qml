@@ -21,6 +21,7 @@ import "components"
 //shell.qml
 Scope {
 
+  
     NotificationService {
         id: notificationService
     }
@@ -100,4 +101,21 @@ Scope {
     */
 
     ClipboardHistory {}
+    
+    /*
+   PanelWindow {
+        implicitWidth: 400
+        implicitHeight: 200
+        color: "transparent"
+        Rectangle{
+          anchors.fill: parent
+          color: "cyan"
+          Text {
+            anchors.centerIn: parent
+            text: "poo" + Pipewire.defaultAudioSink
+          }
+        }
+   }
+   */
+
 }

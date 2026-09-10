@@ -38,18 +38,26 @@ Item {
     }
     Item {
         id: icon
-        width: 50
+        width: 100
         height: width
         anchors {
             top: parent.top
-            topMargin: yo.height * 0.25
+            topMargin: yo.height * 0.17
             horizontalCenter: parent.horizontalCenter
         }
+        
         Image {
-            anchors.centerIn: parent
-            source: "file:////home/dunishaaa/Pictures/AMGI0458_01.jpg"
-            sourceSize.width: 4 * 50
+            anchors.fill: parent
+            source: mpris.player.trackArtUrl
+            fillMode: Image.PreserveAspectCrop
+            onStatusChanged: {
+              if(status === Image.Ready){
+                console.log("Artwork: ", source)
+                console.log("Size: ", sourceSize.width, "x", sourceSize.height)
+              }
+            }
         }
+        
     }
     Item {
         id: controls
@@ -70,7 +78,7 @@ Item {
             }
             Text {
                 id: playIcon
-                text: mpris.player.isPlaying ? "" : ""
+                text: mpris.player.isPlaying ? "":"" 
                 font.pixelSize: 40
                 color: "#dbc8ed"
                 MouseArea {

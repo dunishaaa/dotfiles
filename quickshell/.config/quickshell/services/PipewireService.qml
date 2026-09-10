@@ -9,8 +9,8 @@ import Quickshell.Networking
 
 Singleton {
     id: root
-    property PwNode currentSink: Pipewire.preferredDefaultAudioSink
-    property PwNode currentSource: Pipewire.preferredDefaultAudioSource
+    property PwNode currentSink: Pipewire.defaultAudioSink
+    property PwNode currentSource: Pipewire.defaultAudioSource
 
     PwObjectTracker {
         objects: [root.currentSink, root.currentSource]
